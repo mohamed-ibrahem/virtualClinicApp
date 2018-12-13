@@ -1,0 +1,27 @@
+<ion-header>
+  <app-header with-header="false"></app-header>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="credentials" (ngSubmit)="login()">
+    <ion-row>
+      <ion-col col-12 text-center style="margin-bottom: calc(90vh - 355px)">
+        <img src="../../assets/imgs/logo.png" alt="LOGO" height="64">
+      </ion-col>
+      <ion-col col-12>
+        <ion-label><ion-icon name="ios-person-outline"></ion-icon></ion-label>
+        <ion-input formControlName="username" type="email" placeholder="Email" autocomplete="on"></ion-input>
+      </ion-col>
+      <ion-col col-12 style="margin-bottom: 20px;">
+        <ion-label><ion-icon name="ios-unlock-outline"></ion-icon></ion-label>
+        <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+      </ion-col>
+
+      <ion-col col-12>
+        <button ion-button block
+                color="primary" type="submit"
+                [disabled]="!credentials.valid">Submit</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

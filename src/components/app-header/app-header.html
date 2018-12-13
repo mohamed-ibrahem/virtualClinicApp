@@ -1,0 +1,11 @@
+<ion-navbar *ngIf="header == 'true'">
+  <ion-title>
+    {{ title }}
+  </ion-title>
+</ion-navbar>
+
+<div class="app-spinner-container" *ngIf="app.isLoading">
+  <ion-spinner name="crescent"></ion-spinner>
+</div>
+
+<ng-content></ng-content>

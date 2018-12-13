@@ -1,0 +1,39 @@
+page-login {
+  ion-content {
+    background: color($colors, primary); /* Old browsers */
+    background: -moz-linear-gradient(-45deg, color($colors, primary) 0%, darken(color($colors, primary), 12%) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, color($colors, primary) 0%,darken(color($colors, primary), 12%) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, color($colors, primary) 0%,darken(color($colors, primary), 12%) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='color($colors, primary)', endColorstr='darken(color($colors, primary), 12%',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    form {
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+
+      ion-row {
+        ion-label {
+          position: absolute;
+          z-index: 1;
+          left: 20px;
+          font-size: 20px;
+          top: 0;
+          color: #9e9e9e;
+        }
+        button, ion-input {
+          border-radius: 25px !important;
+          font-size: 1.4rem !important;
+
+          &[disabled] {
+            opacity: .8;
+          }
+          &:not(button) {
+            background-color: rgba(255, 255, 255, .7);
+            padding-left: 30px;
+            padding-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}

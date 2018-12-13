@@ -1,22 +1,53 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import {AlertController, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { TabsPage } from '../pages/tabs/tabs';
+import {HttpProvider} from "../providers/helpers/http";
+import {VirtualClinicApp} from "../providers/VirtualClinicApp";
+import {LoginPage} from "../pages/login/login";
+import {TabsPage} from "../pages/tabs/tabs";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = null;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor (platform: Platform,
+               statusBar: StatusBar,
+               splashScreen: SplashScreen,
+               alertCtrl: AlertController,
+               http: HttpProvider,
+               app: VirtualClinicApp)
+  {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      this.rootPage = app.auth.isAuth ? TabsPage : LoginPage;
+
       statusBar.styleDefault();
       splashScreen.hide();
+
+      app.presentAlert('Enter base url', null, {
+        inputs: [
+          {
+            name: 'url',
+            placeholder: 'URL'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Save',
+            handler: data => {
+              http.url = data.url;
+              app.loading('adding_url');
+
+              setTimeout(() => {
+                app.clearLoading('adding_url');
+              }, 2000)
+            }
+          }
+        ]
+      })
     });
   }
 }
