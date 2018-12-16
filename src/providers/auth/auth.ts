@@ -9,7 +9,6 @@ export class AuthProvider {
     'client_secret': '6dMrMwxk8ufVt96XzGxg3zdYSbIHA07feQ8ceWX1',
     'grant_type': 'password'
   };
-  protected _token = null;
 
   constructor(public storage: Storage, public http: HttpProvider) {
   }
@@ -27,43 +26,49 @@ export class AuthProvider {
         }, (err) => rej(err))
     })
   }
-
   setToken(token, expiration) {
     this.storage.set('token', token)
       .then(() => {
         this.storage.set('expiration', expiration);
       });
   }
-
   destroyToken() {
     this.storage.remove('token');
     this.storage.remove('expiration');
   }
 
   get token() {
-    this.storage.get('token')
-      .then((token) => {
-        if (token) {
-          this.storage.get('expiration')
-            .then((expiration) => {
-              if (expiration) {
-                if (Date.now() > parseInt(expiration)) {
-                  this.destroyToken();
-                  this._token = null;
+    return new Promise(res => {
+      this.storage.get('token')
+        .then((token) => {
+          if (token) {
+            this.storage.get('expiration')
+              .then((expiration) => {
+                if (expiration) {
+                  if (Date.now() > parseInt(expiration)) {
+                    this.destroyToken();
+                    res(null);
 
-                  return;
+                    return;
+                  }
+
+                  res(token)
                 }
-
-                this._token = token;
-              }
-            });
-        }
-      });
-
-    return this._token;
+              });
+          }
+        });
+    });
   }
-
   get isAuth() {
-    return this.token != null;
+    let token;
+
+    this.token.then((data) => {
+      if (data !== null) token = data;
+    });
+
+    return token !== null;
+  }
+  get user() {
+    return this.http.get('api/get_auth_user');
   }
 }

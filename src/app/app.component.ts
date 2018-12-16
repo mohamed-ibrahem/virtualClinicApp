@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import {AlertController, Platform} from 'ionic-angular';
+import {AlertController, Events, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {HttpProvider} from "../providers/helpers/http";
 import {VirtualClinicApp} from "../providers/VirtualClinicApp";
 import {LoginPage} from "../pages/login/login";
 import {TabsPage} from "../pages/tabs/tabs";
@@ -18,15 +17,10 @@ export class MyApp {
                statusBar: StatusBar,
                splashScreen: SplashScreen,
                alertCtrl: AlertController,
-               http: HttpProvider,
-               app: VirtualClinicApp)
+               app: VirtualClinicApp,
+               events: Events)
   {
     platform.ready().then(() => {
-      this.rootPage = app.auth.isAuth ? TabsPage : LoginPage;
-
-      statusBar.styleDefault();
-      splashScreen.hide();
-
       app.presentAlert('Enter base url', null, {
         inputs: [
           {
@@ -38,8 +32,14 @@ export class MyApp {
           {
             text: 'Save',
             handler: data => {
-              http.url = data.url;
+              app.http.url = data.url;
               app.loading('adding_url');
+              this.rootPage = app.auth.isAuth ? TabsPage : LoginPage;
+              if (app.auth.isAuth) {
+                app.http.options['Accept'] = 'Bearer';
+              }
+              statusBar.styleDefault();
+              splashScreen.hide();
 
               setTimeout(() => {
                 app.clearLoading('adding_url');
@@ -47,7 +47,14 @@ export class MyApp {
             }
           }
         ]
-      })
+      });
+
+      events.subscribe('user:login', () => {
+        app.http.options.headers.append('Authorization', 'Bearer ' + app.auth.token);
+      });
+      events.subscribe('user:logout', () => {
+        app.http.options.headers.delete('Authorization')
+      });
     });
   }
 }
