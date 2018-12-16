@@ -42,19 +42,16 @@ export class AuthProvider {
       this.storage.get('token')
         .then((token) => {
           if (token) {
-            this.storage.get('expiration')
-              .then((expiration) => {
-                if (expiration) {
-                  if (Date.now() > parseInt(expiration)) {
-                    this.destroyToken();
-                    res(null);
+            if (expiration) {
+              if (Date.now() > parseInt(expiration)) {
+                this.destroyToken();
+                res(null);
 
-                    return;
-                  }
+                return;
+              }
 
-                  res(token)
-                }
-              });
+              res(token)
+            }
           }
         });
     });
