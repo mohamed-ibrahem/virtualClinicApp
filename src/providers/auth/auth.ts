@@ -26,46 +26,26 @@ export class AuthProvider {
         }, (err) => rej(err))
     })
   }
+
   setToken(token, expiration) {
     this.storage.set('token', token)
       .then(() => {
         this.storage.set('expiration', expiration);
       });
   }
+
   destroyToken() {
     this.storage.remove('token');
     this.storage.remove('expiration');
   }
 
   get token() {
-    return new Promise(res => {
-      this.storage.get('token')
-        .then((token) => {
-          if (token) {
-            if (expiration) {
-              if (Date.now() > parseInt(expiration)) {
-                this.destroyToken();
-                res(null);
-
-                return;
-              }
-
-              res(token)
-            }
-          }
-        });
-    });
+    return null;
   }
   get isAuth() {
-    let token;
-
-    this.token.then((data) => {
-      if (data !== null) token = data;
-    });
-
-    return token !== null;
+    return this.token != null;
   }
   get user() {
-    return this.http.get('api/get_auth_user');
+    return null;
   }
 }

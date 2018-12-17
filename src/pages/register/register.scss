@@ -1,0 +1,45 @@
+page-register {
+  ion-content {
+    form {
+      height: 100%;
+
+      .form-tabs {
+        display: flex;
+        background-color: color($colors, light);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+          position: relative;
+          text-align: center;
+          padding: 10px;
+          width: 33.333%;
+          height: 80px;
+
+          ion-icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 10px;
+          }
+          span {
+            position: absolute;
+            bottom: 16px;
+            width: 100%;
+            left: 0;
+          }
+          &.active {
+            background-color: darken(color($colors, light), 10%);
+          }
+          &.done {
+            background-color: color($colors, primary);
+            color: color($colors, light);
+          }
+        }
+      }
+      ion-slides {
+        height: calc(100% - 80px);
+      }
+    }
+  }
+}

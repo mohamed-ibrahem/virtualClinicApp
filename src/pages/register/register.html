@@ -1,0 +1,59 @@
+<ion-header>
+  <app-header title="Register new account"></app-header>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="form">
+    <ul class="form-tabs" #formTabs>
+      <li class="active">
+        <ion-icon name="md-finger-print"></ion-icon>
+        <span>Profile setup</span>
+      </li>
+      <li>
+        <ion-icon name="ios-contact-outline"></ion-icon>
+        <span>Account setup</span>
+      </li>
+      <li>
+        <ion-icon name="ios-heart-outline"></ion-icon>
+        <span>More information</span>
+      </li>
+    </ul>
+
+    <ion-slides (ionSlideDidChange)="slideChanged()" formArrayName="register">
+      <ion-slide formGroupName="0">
+        <ion-list>
+          <ion-item>
+            <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="tel" formControlName="phone" placeholder="Phone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide formGroupName="1">
+        <h1>2</h1>
+      </ion-slide>
+      <ion-slide formGroupName="2">
+        <h1>3</h1>
+      </ion-slide>
+    </ion-slides>
+  </form>
+</ion-content>
+
+<ion-footer padding>
+  <ion-row>
+    <ion-col col-3 *ngIf="! isFirst">
+      <button ion-button block color="danger" (click)="goToBack()">Back</button>
+    </ion-col>
+    <ion-col col *ngIf="! isEnd">
+      <button ion-button block (click)="gotToNext()">Continue</button>
+    </ion-col>
+    <ion-col col *ngIf="isEnd">
+      <button ion-button block (click)="register()">Register</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

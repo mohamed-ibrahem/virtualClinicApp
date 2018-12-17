@@ -3,24 +3,38 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="credentials" (ngSubmit)="login()">
+  <form [formGroup]="credentials" (ngSubmit)="forgot ? forgotten() : login()">
     <ion-row>
-      <ion-col col-12 text-center style="margin-bottom: calc(90vh - 355px)">
+      <ion-col col-12 text-center [style.marginBottom]="'calc(90vh - ' + (forgot ? 292 : 455) +'px)'">
         <img src="../../assets/imgs/logo.png" alt="LOGO" height="64">
       </ion-col>
       <ion-col col-12>
         <ion-label><ion-icon name="ios-person-outline"></ion-icon></ion-label>
         <ion-input formControlName="username" type="email" placeholder="Email" autocomplete="on"></ion-input>
       </ion-col>
-      <ion-col col-12 style="margin-bottom: 20px;">
+      <ion-col col-12 *ngIf="! forgot">
         <ion-label><ion-icon name="ios-unlock-outline"></ion-icon></ion-label>
         <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+      </ion-col>
+
+      <ion-col col-12 text-right style="margin-bottom: 10px; margin-top: 5px;">
+        <a href="#" *ngIf="! forgot" (click)="goToForgotten()">Forget your password?</a>
+        <a href="#" *ngIf="forgot" (click)="goToForgotten(false)">Go to login</a>
       </ion-col>
 
       <ion-col col-12>
         <button ion-button block
                 color="primary" type="submit"
-                [disabled]="!credentials.valid">Submit</button>
+                [disabled]="!credentials.valid">{{ forgot ? 'Send Verification Code' : 'Login' }}</button>
+      </ion-col>
+
+      <ion-col col-12 *ngIf="! forgot">
+        <span style="display: block;text-align: center;color: #d0d0d0;margin: 20px 0;position: relative;">
+          <span style="height: 1px;width: calc(50% - 20px);background-color: #ababab;display: inline-block;position: absolute;left: 0;top: 50%;"></span>
+          OR
+          <span style="height: 1px;width: calc(50% - 20px);background-color: #ababab;display: inline-block;position: absolute;right: 0;top: 50%;"></span>
+        </span>
+        <a ion-button block color="danger" (click)="goToRegister()">Register</a>
       </ion-col>
     </ion-row>
   </form>

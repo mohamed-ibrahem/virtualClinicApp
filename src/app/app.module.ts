@@ -16,6 +16,7 @@ import {AppHeaderComponent} from "../components/app-header/app-header";
 import {VirtualClinicApp} from "../providers/VirtualClinicApp";
 import {IonicStorageModule} from "@ionic/storage";
 import {Functions} from "../providers/helpers/functions";
+import {RegisterPage} from "../pages/register/register";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {Functions} from "../providers/helpers/functions";
     HomePage,
     TabsPage,
     LoginPage,
+    RegisterPage,
 
     AppHeaderComponent
   ],
@@ -30,14 +32,19 @@ import {Functions} from "../providers/helpers/functions";
     BrowserModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '',
+      tabsPlacement: 'bottom',
+      swipeBackEnabled: true
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

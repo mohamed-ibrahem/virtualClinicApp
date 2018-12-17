@@ -7,12 +7,6 @@ import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
   templateUrl: 'home.html'
 })
 export class HomePage {
-  username;
-
-  constructor(public navCtrl: NavController, public app: VirtualClinicApp) {
-    this.app.auth.user.subscribe((user) => {
-      console.log(user);
-    });
+  constructor(public navCtrl: NavController) {
   }
-
 }
