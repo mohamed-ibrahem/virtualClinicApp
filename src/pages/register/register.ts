@@ -18,7 +18,8 @@ export class RegisterPage {
         this.fb.group({
           email: ['', Validators.compose([Validators.required, Validators.email])],
           phone: ['', Validators.required],
-          password: ['', Validators.required]
+          password: ['', Validators.required],
+          password_confirmation: ['', Validators.required]
         }),
         this.fb.group({
           email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -40,8 +41,9 @@ export class RegisterPage {
   }
 
   gotToNext() {
-    var registerArray = <FormArray> this.form.controls['register'];
-    if (!registerArray.invalid) {
+    var registerArray = this.formArray;
+
+    if (!registerArray.at(this.slides.getActiveIndex()).invalid) {
       this.slides.lockSwipeToNext(false);
 
       this.slides.slideNext();
@@ -76,5 +78,14 @@ export class RegisterPage {
 
   get isEnd() {
     return this.slides.isEnd();
+  }
+
+  get disabled() {
+    var registerArray = this.formArray;
+    return registerArray.at(this.slides.getActiveIndex() ? this.slides.getActiveIndex() : 0).invalid;
+  }
+
+  get formArray() {
+    return <FormArray> this.form.controls['register'];
   }
 }

@@ -22,17 +22,14 @@
 
     <ion-slides (ionSlideDidChange)="slideChanged()" formArrayName="register">
       <ion-slide formGroupName="0">
-        <ion-list>
-          <ion-item>
-            <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="tel" formControlName="phone" placeholder="Phone"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
-          </ion-item>
-        </ion-list>
+        <ion-row  margin>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="email" type="email" placeholder="Email" autocomplete="on"></ion-input>
+          </ion-col>
+        </ion-row>
       </ion-slide>
       <ion-slide formGroupName="1">
         <h1>2</h1>
@@ -50,10 +47,10 @@
       <button ion-button block color="danger" (click)="goToBack()">Back</button>
     </ion-col>
     <ion-col col *ngIf="! isEnd">
-      <button ion-button block (click)="gotToNext()">Continue</button>
+      <button ion-button [disabled]="disabled" block (click)="gotToNext()">Continue</button>
     </ion-col>
     <ion-col col *ngIf="isEnd">
-      <button ion-button block (click)="register()">Register</button>
+      <button ion-button [disabled]="disabled" block (click)="register()">Register</button>
     </ion-col>
   </ion-row>
 </ion-footer>

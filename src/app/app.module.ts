@@ -17,6 +17,7 @@ import {VirtualClinicApp} from "../providers/VirtualClinicApp";
 import {IonicStorageModule} from "@ionic/storage";
 import {Functions} from "../providers/helpers/functions";
 import {RegisterPage} from "../pages/register/register";
+import {Values} from "../providers/values";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {RegisterPage} from "../pages/register/register";
     AuthProvider,
     HttpProvider,
     Functions,
+    Values,
     VirtualClinicApp
   ]
 })
