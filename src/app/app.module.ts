@@ -17,12 +17,14 @@ import {VirtualClinicApp} from "../providers/VirtualClinicApp";
 import {IonicStorageModule} from "@ionic/storage";
 import {Functions} from "../providers/helpers/functions";
 import {RegisterPage} from "../pages/register/register";
+import {MasterPage} from "../pages/master/master";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    MasterPage,
     TabsPage,
+    HomePage,
     LoginPage,
     RegisterPage,
 
@@ -41,8 +43,9 @@ import {RegisterPage} from "../pages/register/register";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    MasterPage,
     TabsPage,
+    HomePage,
     LoginPage,
     RegisterPage
   ],

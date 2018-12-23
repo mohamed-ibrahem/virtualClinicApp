@@ -3,17 +3,19 @@ import {Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
-import {LoginPage} from "../pages/login/login";
+import {VirtualClinicApp} from "../providers/VirtualClinicApp";
+import {MasterPage} from "../pages/master/master";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = LoginPage;
+  rootPage: any = MasterPage;
 
   constructor(platform: Platform,
               statusBar: StatusBar,
-              splashScreen: SplashScreen) {
+              splashScreen: SplashScreen,
+              app: VirtualClinicApp) {
     platform.ready().then(() => {
       // app.presentAlert('Enter base url', null, {
       //   inputs: [
@@ -27,13 +29,12 @@ export class MyApp {
       //       text: 'Save',
       //       handler: data => {
       //         app.http.url = data.url;
-      //
+              statusBar.styleDefault();
+              splashScreen.hide();
       //       }
       //     }
       //   ]
       // });
-      statusBar.styleDefault();
-      splashScreen.hide();
     });
   }
 }
