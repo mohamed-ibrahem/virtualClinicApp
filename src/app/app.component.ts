@@ -4,13 +4,13 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {VirtualClinicApp} from "../providers/VirtualClinicApp";
-import {MasterPage} from "../pages/master/master";
+import {HomePage} from "../pages/home/home";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = MasterPage;
+  rootPage: any = HomePage;
 
   constructor(platform: Platform,
               statusBar: StatusBar,
