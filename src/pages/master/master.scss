@@ -1,7 +1,8 @@
 page-master {
   ion-content {
+
     button {
-      width: 75%;
+      width: 74%;
       margin: 0 !important;
       height: 130% !important;
       position: fixed !important;
@@ -10,15 +11,39 @@ page-master {
       box-shadow: none !important;
       right: 0;
       top: 0;
+      padding: 0;
 
-      &:last-of-type {
+      .button-inner {
+        padding: 50px;
+        align-items: flex-start;
+        text-align: right;
+
+        ion-icon {
+          &:before {
+            display: block;
+            font-size: 65px;
+            margin-bottom: 25px;
+          }
+        }
+      }
+
+        &:last-of-type {
+        background-color: darken(color($colors, primary), 10%) !important;
+        width: 85%;
         right: initial;
-        left: -20%;
-        top: -10%;
+        left: -25%;
+        top: -5%;
         transform: rotate(-15deg);
 
-        span, .button-inner {
+        .button-inner {
+          text-align: left;
           transform: rotate(15deg);
+          height: 75vh;
+          align-items: flex-end;
+          width: 135%;
+        }
+        &.activated {
+          background-color: darken(color($colors, primary), 12%) !important;
         }
       }
     }

@@ -19,6 +19,8 @@ export class LoginPage {
     public fb: FormBuilder,
     public app: VirtualClinicApp
   ) {
+    this.app.initApp();
+
     this.credentials = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.min(6)])]
@@ -26,13 +28,11 @@ export class LoginPage {
   }
 
   login() {
-    if (this.credentials.value.email !== 'doctor1@system.app' && this.credentials.value.password !== 'doctor') {
-      this.app.presentToast('These credentials do not match our records.');
-    } else {
+    this.app.auth.login(this.credentials.value).then(() => {
       this.app.presentToast('Welcome back :)');
-
       this.navCtrl.setRoot(TabsPage);
-    }
+
+    }, (error) => this.app.presentToast(error));
   }
 
   forgotten() {

@@ -16,12 +16,12 @@ export class VirtualClinicApp {
   ) {}
 
   initApp() {
-    this.http.get('api/configure')
-      .subscribe((data) => {
-        console.log(data);
-        this.values.updateLan(data.lan);
-        this.values.updateLocales(data.locales);
-      })
+    this.http.setUrl().then(() => {
+      this.http.get('api/configure')
+        .subscribe((data) => {
+          this.values.update(data);
+        });
+    });
   }
 
   presentAlert(title, text, options) {

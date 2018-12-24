@@ -53,8 +53,8 @@ page-register {
             top: 0;
             color: #9e9e9e;
           }
-          ion-input, ion-select, ion-textarea {
-            max-width: 100%;
+          ion-input, ion-select, ionic-selectable, ion-textarea {
+            max-width: 100% !important;
             text-align: left;
             border-radius: 25px !important;
             font-size: 1.4rem !important;

@@ -1,18 +1,20 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {IonicPage, NavController, Slides} from 'ionic-angular';
 import {FormArray, FormBuilder, Validators} from "@angular/forms";
+import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
 
 @IonicPage()
 @Component({
   selector: 'page-register',
-  templateUrl: 'register.html',
+  templateUrl: 'register.html'
 })
 export class RegisterPage {
   @ViewChild(Slides) slides: Slides;
   @ViewChild('formTabs') ul: ElementRef;
   form;
 
-  constructor(public navCtrl: NavController, public fb: FormBuilder) {
+  constructor(public navCtrl: NavController, public fb: FormBuilder, public app: VirtualClinicApp) {
+    console.log(app.values.countries);
     this.form = this.fb.group({
       register: this.fb.array([
         this.fb.group({

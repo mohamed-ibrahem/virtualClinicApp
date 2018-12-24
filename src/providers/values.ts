@@ -1,21 +1,28 @@
 export class Values {
-  lan = {
-    en: {
-
-    }
-  };
-
+  lan : any = {};
   locales = [];
+  private lang = 'en';
+  private _countries;
 
-  updateLan(lan) {
-    Object.assign(lan, this.lan)
+  update(data) {
+    this.lan = data.lan;
+    this.locales = data.locales;
+    this._countries = data.supported_countries;
   }
 
-  updateLocales(locales) {
-    Object.assign(locales, this.locales)
+  get(key, _default) {
+    let value = this.lan[this.lang][key];
+
+    if (value) return value;
+
+    return _default;
   }
 
-  currentLang() {
-    //
+  setLocale(lang) {
+    this.lang = lang;
+  }
+
+  get countries() {
+    return Array.of(this._countries.countries)[0];
   }
 }

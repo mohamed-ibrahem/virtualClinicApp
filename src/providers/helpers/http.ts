@@ -16,7 +16,29 @@ export class HttpProvider {
     })
   };
 
-  constructor(public http: HttpClient, protected functions: Functions) {
+  constructor(public http: HttpClient, protected functions: Functions) {}
+
+  setUrl() {
+    return new Promise(res => {
+      this.functions.presentAlert('Enter Your base URL', '', {
+        inputs: [
+          {
+            name: 'url',
+            placeholder: 'Url'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Save',
+            handler: data => {
+              this.url = data.url;
+
+              res();
+            }
+          }
+        ]
+      })
+    })
   }
 
   private sendRequest(type, uri, data, options) {

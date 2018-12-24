@@ -19,6 +19,8 @@ import {Functions} from "../providers/helpers/functions";
 import {RegisterPage} from "../pages/register/register";
 import {Values} from "../providers/values";
 import {MasterPage} from "../pages/master/master";
+import {WithKeysPipe} from "../pipes/with-keys/with-keys";
+import {IonicSelectableModule} from "ionic-selectable";
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import {MasterPage} from "../pages/master/master";
     HomePage,
     LoginPage,
     RegisterPage,
+
+    WithKeysPipe,
 
     AppHeaderComponent
   ],
@@ -41,7 +45,8 @@ import {MasterPage} from "../pages/master/master";
       backButtonText: '',
       tabsPlacement: 'bottom',
       swipeBackEnabled: true
-    })
+    }),
+    IonicSelectableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
