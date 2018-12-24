@@ -1,81 +1,85 @@
 page-register {
+  ion-header {
+    .form-tabs {
+      display: flex;
+      background-color: color($colors, light);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        position: relative;
+        text-align: center;
+        padding: 10px;
+        width: 33.333%;
+        height: 80px;
+
+        ion-icon {
+          display: block;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        span {
+          position: absolute;
+          bottom: 16px;
+          width: 100%;
+          left: 0;
+        }
+        &.active {
+          background-color: darken(color($colors, light), 10%);
+        }
+        &.done {
+          background-color: color($colors, primary);
+          color: color($colors, light);
+        }
+      }
+    }
+  }
+
   ion-content {
+    background-color: #f1f1f1 !important;
     form {
       height: 100%;
 
-      .form-tabs {
-        display: flex;
-        background-color: color($colors, light);
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        li {
-          position: relative;
-          text-align: center;
-          padding: 10px;
-          width: 33.333%;
-          height: 80px;
-
-          ion-icon {
-            display: block;
-            font-size: 24px;
-            margin-bottom: 10px;
-          }
-          span {
-            position: absolute;
-            bottom: 16px;
-            width: 100%;
-            left: 0;
-          }
-          &.active {
-            background-color: darken(color($colors, light), 10%);
-          }
-          &.done {
-            background-color: color($colors, primary);
-            color: color($colors, light);
-          }
-        }
-      }
       ion-slides {
         height: calc(100% - 80px);
 
         ion-row {
-          ion-col {
-            ion-label {
-              position: absolute;
-              z-index: 1;
-              left: 20px;
-              font-size: 20px;
-              top: 0;
-              color: #272727;
-            }
-            button, ion-input {
-              border-radius: 25px !important;
-              font-size: 1.4rem !important;
+          ion-label {
+            position: absolute;
+            z-index: 1;
+            left: 20px;
+            font-size: 20px;
+            top: 0;
+            color: #9e9e9e;
+          }
+          ion-input, ion-select, ion-textarea {
+            max-width: 100%;
+            text-align: left;
+            border-radius: 25px !important;
+            font-size: 1.4rem !important;
+            background-color: rgba(255, 255, 255, .7);
+            padding-left: 30px !important;
+            padding-right: 20px !important;
+            box-shadow: none;
+            transition: all .3s ease-in-out;
 
-              &[disabled] {
-                opacity: .8;
-              }
-              &:not(button) {
-                background-color: rgba(187, 187, 187, 0.7);
-                padding-left: 30px;
-                padding-right: 20px;
+            &.ng-touched.ng-invalid {
+              box-shadow: inset 0 -4px 0 transparentize(color($colors, danger), .4);
+            }
+            &:not(ion-input) {
+              padding-left: 45px !important;
+            }
+          }
 
-                &.ng-touched.ng-invalid {
-                  box-shadow: inset 1px -4px 3px rgba(238, 0, 0, 0.41);
-                }
-              }
-            }
-            a {
-              color: color($colors, light);
-              text-decoration: none;
-            }
-            > span {
-              display: block;
-              font-size: 12px;
-              color: red;
-            }
+          ion-textarea {
+            border-radius: 15px !important;
+            padding: 5px !important;
+          }
+
+          a {
+            color: color($colors, light);
+            text-decoration: none;
           }
         }
       }

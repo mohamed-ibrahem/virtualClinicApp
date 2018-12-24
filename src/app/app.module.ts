@@ -18,12 +18,14 @@ import {IonicStorageModule} from "@ionic/storage";
 import {Functions} from "../providers/helpers/functions";
 import {RegisterPage} from "../pages/register/register";
 import {Values} from "../providers/values";
+import {MasterPage} from "../pages/master/master";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    MasterPage,
     TabsPage,
+    HomePage,
     LoginPage,
     RegisterPage,
 
@@ -34,6 +36,8 @@ import {Values} from "../providers/values";
     HttpClientModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: false,
       backButtonText: '',
       tabsPlacement: 'bottom',
       swipeBackEnabled: true
@@ -42,8 +46,9 @@ import {Values} from "../providers/values";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    MasterPage,
     TabsPage,
+    HomePage,
     LoginPage,
     RegisterPage
   ],

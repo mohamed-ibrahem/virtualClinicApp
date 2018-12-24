@@ -16,20 +16,19 @@ export class RegisterPage {
     this.form = this.fb.group({
       register: this.fb.array([
         this.fb.group({
-          email: ['', Validators.compose([Validators.required, Validators.email])],
-          phone: ['', Validators.required],
-          password: ['', Validators.required],
-          password_confirmation: ['', Validators.required]
+          name: ['', Validators.required],
+          gender: ['', Validators.required],
+          age: ['', Validators.compose([Validators.required, Validators.min(16)])],
+          country: ['', Validators.required]
         }),
         this.fb.group({
           email: ['', Validators.compose([Validators.required, Validators.email])],
-          phone: ['', Validators.required],
-          password: ['', Validators.required]
+          phone: ['', Validators.compose([Validators.required, Validators.minLength(12)])],
+          password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+          password_confirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
         }),
         this.fb.group({
-          email: ['', Validators.compose([Validators.required, Validators.email])],
-          phone: ['', Validators.required],
-          password: ['', Validators.required]
+          description: ['', Validators.required]
         })
       ])
     })
@@ -41,9 +40,7 @@ export class RegisterPage {
   }
 
   gotToNext() {
-    var registerArray = this.formArray;
-
-    if (!registerArray.at(this.slides.getActiveIndex()).invalid) {
+    if (this.formArray.at(this.slides.getActiveIndex()).valid) {
       this.slides.lockSwipeToNext(false);
 
       this.slides.slideNext();
@@ -80,12 +77,13 @@ export class RegisterPage {
     return this.slides.isEnd();
   }
 
-  get disabled() {
-    var registerArray = this.formArray;
-    return registerArray.at(this.slides.getActiveIndex() ? this.slides.getActiveIndex() : 0).invalid;
-  }
-
   get formArray() {
     return <FormArray> this.form.controls['register'];
+  }
+
+  get invalid() {
+    let form = this.formArray.at(this.slides.getActiveIndex())
+
+    return form ? form.invalid : true;
   }
 }

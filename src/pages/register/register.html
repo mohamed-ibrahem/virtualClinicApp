@@ -1,41 +1,91 @@
 <ion-header>
   <app-header title="Register new account"></app-header>
+
+  <ul class="form-tabs" #formTabs>
+    <li class="active">
+      <ion-icon name="md-finger-print"></ion-icon>
+      <span>Profile setup</span>
+    </li>
+    <li>
+      <ion-icon name="ios-contact-outline"></ion-icon>
+      <span>Account setup</span>
+    </li>
+    <li>
+      <ion-icon name="ios-heart-outline"></ion-icon>
+      <span>More information</span>
+    </li>
+  </ul>
 </ion-header>
 
 
 <ion-content>
   <form [formGroup]="form">
-    <ul class="form-tabs" #formTabs>
-      <li class="active">
-        <ion-icon name="md-finger-print"></ion-icon>
-        <span>Profile setup</span>
-      </li>
-      <li>
-        <ion-icon name="ios-contact-outline"></ion-icon>
-        <span>Account setup</span>
-      </li>
-      <li>
-        <ion-icon name="ios-heart-outline"></ion-icon>
-        <span>More information</span>
-      </li>
-    </ul>
-
     <ion-slides (ionSlideDidChange)="slideChanged()" formArrayName="register">
       <ion-slide formGroupName="0">
-        <ion-row  margin>
+        <ion-row>
           <ion-col col-12>
             <ion-label>
               <ion-icon name="ios-person-outline"></ion-icon>
             </ion-label>
-            <ion-input formControlName="email" type="email" placeholder="Email" autocomplete="on"></ion-input>
+            <ion-input type="text" formControlName="name" placeholder="Name"></ion-input>
+          </ion-col>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-select placeholder="Gender" formControlName="gender">
+              <ion-option value="male">Male</ion-option>
+              <ion-option value="female">Female</ion-option>
+            </ion-select>
+          </ion-col>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-input type="number" formControlName="age" placeholder="Age"></ion-input>
+          </ion-col>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-input type="text" formControlName="country" placeholder="Country"></ion-input>
           </ion-col>
         </ion-row>
       </ion-slide>
       <ion-slide formGroupName="1">
-        <h1>2</h1>
+        <ion-row>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+          </ion-col>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-input type="tel" formControlName="phone" placeholder="Phone"></ion-input>
+          </ion-col>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+          </ion-col>
+          <ion-col col-12>
+            <ion-label>
+              <ion-icon name="ios-person-outline"></ion-icon>
+            </ion-label>
+            <ion-input type="password" formControlName="password_confirmation" placeholder="Confirm Password"></ion-input>
+          </ion-col>
+        </ion-row>
       </ion-slide>
       <ion-slide formGroupName="2">
-        <h1>3</h1>
+        <ion-row>
+          <ion-col col-12>
+            <ion-textarea rows="6" placeholder="Description" formcontrolName="description"></ion-textarea>
+          </ion-col>
+        </ion-row>
       </ion-slide>
     </ion-slides>
   </form>
@@ -47,10 +97,10 @@
       <button ion-button block color="danger" (click)="goToBack()">Back</button>
     </ion-col>
     <ion-col col *ngIf="! isEnd">
-      <button ion-button [disabled]="disabled" block (click)="gotToNext()">Continue</button>
+      <button ion-button block [disabled]="invalid" (click)="gotToNext()">Continue</button>
     </ion-col>
     <ion-col col *ngIf="isEnd">
-      <button ion-button [disabled]="disabled" block (click)="register()">Register</button>
+      <button ion-button block [disabled]="invalid" (click)="register()">Register</button>
     </ion-col>
   </ion-row>
 </ion-footer>

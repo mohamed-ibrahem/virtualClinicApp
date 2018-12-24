@@ -3,40 +3,20 @@ import {Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
-import {RegisterPage} from "../pages/register/register";
-import {VirtualClinicApp} from "../providers/VirtualClinicApp";
+import {LoginPage} from "../pages/login/login";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = RegisterPage;
+  rootPage: any = LoginPage;
 
   constructor(platform: Platform,
               statusBar: StatusBar,
-              splashScreen: SplashScreen,
-              app: VirtualClinicApp) {
+              splashScreen: SplashScreen) {
     platform.ready().then(() => {
-      app.presentAlert('Enter base url', null, {
-        inputs: [
-          {
-            name: 'url',
-            placeholder: 'URL'
-          },
-        ],
-        buttons: [
-          {
-            text: 'Save',
-            handler: data => {
-              app.http.url = data.url;
-              statusBar.styleDefault();
-              splashScreen.hide();
-              app.initApp();
-            }
-          }
-        ]
-      });
-
+      statusBar.styleDefault();
+      splashScreen.hide();
     });
   }
 }
