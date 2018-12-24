@@ -3,13 +3,13 @@ import {Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
-import {LoginPage} from "../pages/login/login";
+import {MasterPage} from "../pages/master/master";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = LoginPage;
+  rootPage: any = MasterPage;
 
   constructor(platform: Platform,
               statusBar: StatusBar,

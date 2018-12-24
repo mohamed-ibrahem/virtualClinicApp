@@ -1,4 +1,26 @@
 page-master {
   ion-content {
+    button {
+      width: 75%;
+      margin: 0 !important;
+      height: 130% !important;
+      position: fixed !important;
+      border-radius: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      right: 0;
+      top: 0;
+
+      &:last-of-type {
+        right: initial;
+        left: -20%;
+        top: -10%;
+        transform: rotate(-15deg);
+
+        span, .button-inner {
+          transform: rotate(15deg);
+        }
+      }
+    }
   }
 }
