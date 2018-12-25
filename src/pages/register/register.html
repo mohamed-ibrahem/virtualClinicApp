@@ -86,7 +86,7 @@
       <ion-slide formGroupName="2">
         <ion-row>
           <ion-col col-12>
-            <ion-textarea rows="6" placeholder="Description" formcontrolName="description"></ion-textarea>
+            <ion-textarea (keyup)="app.functions.resize($event)" rows="3" placeholder="Description" formcontrolName="description"></ion-textarea>
           </ion-col>
         </ion-row>
       </ion-slide>

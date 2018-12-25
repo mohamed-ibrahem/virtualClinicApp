@@ -37,4 +37,10 @@ export class Functions {
   get isLoading(): boolean {
     return !!this.queries.length;
   }
+
+  static resize($event) {
+    let input = $event.currentTarget;
+
+    input.style.height = input.scrollHeight + 'px';
+  }
 }

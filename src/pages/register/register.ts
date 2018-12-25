@@ -14,7 +14,6 @@ export class RegisterPage {
   form;
 
   constructor(public navCtrl: NavController, public fb: FormBuilder, public app: VirtualClinicApp) {
-    console.log(app.values.countries);
     this.form = this.fb.group({
       register: this.fb.array([
         this.fb.group({
@@ -25,7 +24,7 @@ export class RegisterPage {
         }),
         this.fb.group({
           email: ['', Validators.compose([Validators.required, Validators.email])],
-          phone: ['', Validators.compose([Validators.required, Validators.minLength(12)])],
+          phone: ['', Validators.compose([Validators.required, Validators.minLength(10)])],
           password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
           password_confirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
         }),
@@ -84,7 +83,8 @@ export class RegisterPage {
   }
 
   get invalid() {
-    let form = this.formArray.at(this.slides.getActiveIndex())
+    let activeIndex = this.slides.getActiveIndex(),
+        form = this.formArray.at(activeIndex);
 
     return form ? form.invalid : true;
   }

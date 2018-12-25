@@ -67,14 +67,15 @@ page-register {
             &.ng-touched.ng-invalid {
               box-shadow: inset 0 -4px 0 transparentize(color($colors, danger), .4);
             }
-            &:not(ion-input) {
-              padding-left: 45px !important;
-            }
+          }
+
+          ion-select, ionic-selectable {
+            padding-left: 43px !important;
           }
 
           ion-textarea {
             border-radius: 15px !important;
-            padding: 5px !important;
+            padding: 15px !important;
           }
 
           a {
