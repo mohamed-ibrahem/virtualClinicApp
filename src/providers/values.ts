@@ -1,6 +1,6 @@
 export class Values {
-  lan: any = {};
-  locales = [];
+  lan: any;
+  locales : any = [];
   private lang = 'en';
   private _countries;
 
@@ -11,8 +11,12 @@ export class Values {
   }
 
   get(key, _default?) {
-    let values = {},
-      keys = Object.keys(this.lan[this.lang]).filter((_key) => {
+    if (! this.lan)
+      return _default;
+
+    let lan = this.lan[this.lang],
+      values = {},
+      keys = Object.keys(lan).filter((_key) => {
         return _key.toLowerCase().startsWith(key);
       });
 
@@ -20,10 +24,10 @@ export class Values {
       return _default;
 
     if (keys.length === 1)
-      return this.lan[this.lang][key];
+      return lan[key];
 
     for (let key of keys) {
-      values[key] = this.lan[this.lang][key];
+      values[key] = lan[key];
     }
 
     return values;

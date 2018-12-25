@@ -1,7 +1,8 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {IonicPage, NavController, Slides} from 'ionic-angular';
-import {FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -54,7 +55,24 @@ export class RegisterPage {
   }
 
   register() {
-
+    this.app.auth.register({
+      name: this.form.value.register[0].name,
+      gender: this.form.value.register[0].gender,
+      age: this.form.value.register[0].age,
+      country: this.form.value.register[0].country.key,
+      email: this.form.value.register[1].email,
+      phone: this.form.value.register[1].phone,
+      password: this.form.value.register[1].password,
+      password_confirmation: this.form.value.register[1].password_confirmation,
+      description: this.form.value.register[2].description
+    }).then(
+      () => {
+        this.app.presentToast(this.app.values.get('auth.success'));
+        this.navCtrl.setRoot(TabsPage);
+      },
+      (error) => {
+        this.app.presentToast(error.message);
+      });
   }
 
   slideChanged() {
@@ -84,8 +102,8 @@ export class RegisterPage {
 
   get invalid() {
     let activeIndex = this.slides.getActiveIndex(),
-        form = this.formArray.at(activeIndex);
+      form = this.formArray.at(activeIndex);
 
-    return form ? form.invalid : true;
+    return (form ? form.invalid : true);
   }
 }

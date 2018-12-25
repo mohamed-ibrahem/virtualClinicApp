@@ -1,5 +1,16 @@
 page-master {
+  ion-header {
+    app-header {
+      #language_selector {
+        color: color($colors, light);
+      }
+    }
+  }
   ion-content {
+    .scroll-content {
+      height: 100%;
+      overflow: hidden;
+    }
 
     button {
       width: 74%;
@@ -11,12 +22,13 @@ page-master {
       box-shadow: none !important;
       right: 0;
       top: 0;
-      padding: 0;
+      padding: 0 !important;
 
       .button-inner {
-        padding: 50px;
+        padding: 50px 25px;
         align-items: flex-start;
         text-align: right;
+        justify-content: flex-end;
 
         ion-icon {
           &:before {
@@ -33,6 +45,7 @@ page-master {
         right: initial;
         left: -25%;
         top: -5%;
+        padding-left: 85px !important;
         transform: rotate(-15deg);
 
         .button-inner {
@@ -41,6 +54,7 @@ page-master {
           height: 75vh;
           align-items: flex-end;
           width: 135%;
+          justify-content: flex-start;
         }
         &.activated {
           background-color: darken(color($colors, primary), 12%) !important;

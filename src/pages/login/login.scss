@@ -1,4 +1,11 @@
 page-login {
+  ion-header {
+    app-header {
+      #language_selector {
+        color: color($colors, light);
+      }
+    }
+  }
   ion-content {
     background: color($colors, primary); /* Old browsers */
     background: -moz-linear-gradient(-45deg, color($colors, primary) 0%, darken(color($colors, primary), 12%) 100%); /* FF3.6-15 */

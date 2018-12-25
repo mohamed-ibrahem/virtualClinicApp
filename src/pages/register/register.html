@@ -86,7 +86,7 @@
       <ion-slide formGroupName="2">
         <ion-row>
           <ion-col col-12>
-            <ion-textarea (keyup)="app.functions.resize($event)" rows="3" placeholder="Description" formcontrolName="description"></ion-textarea>
+            <ion-textarea (keyup)="app.functions.resize($event)" rows="3" placeholder="Description" formControlName="description"></ion-textarea>
           </ion-col>
         </ion-row>
       </ion-slide>
@@ -103,7 +103,7 @@
       <button ion-button block [disabled]="invalid" (click)="gotToNext()">Continue</button>
     </ion-col>
     <ion-col col *ngIf="isEnd">
-      <button ion-button block [disabled]="invalid" (click)="register()">Register</button>
+      <button ion-button block color="secondary" [disabled]="invalid" (click)="register()">Register</button>
     </ion-col>
   </ion-row>
 </ion-footer>

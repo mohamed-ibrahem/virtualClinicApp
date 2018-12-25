@@ -7,4 +7,12 @@ app-header {
     padding-bottom: 7px;
     text-align: center;
   }
+
+  #language_selector {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: color($colors, primary);
+    background: none !important;
+  }
 }

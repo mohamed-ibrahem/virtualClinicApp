@@ -38,7 +38,7 @@ export class Functions {
     return !!this.queries.length;
   }
 
-  static resize($event) {
+  resize($event) {
     let input = $event.currentTarget;
 
     input.style.height = input.scrollHeight + 'px';
