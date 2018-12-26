@@ -1,0 +1,21 @@
+<ion-item-sliding>
+  <ion-item>
+    <ion-avatar item-start>
+      <img [src]="user.profile_pic">
+    </ion-avatar>
+    <h2>{{ user.name }}</h2>
+    <p>Ugh. As if.</p>
+  </ion-item>
+
+  <ion-item-options side="right">
+    <button (click)="goToChat()" ion-button color="primary">
+      <ion-icon name="text"></ion-icon>
+      Chat
+    </button>
+
+    <button ion-button color="secondary">
+      <ion-icon name="call"></ion-icon>
+      Call
+    </button>
+  </ion-item-options>
+</ion-item-sliding>

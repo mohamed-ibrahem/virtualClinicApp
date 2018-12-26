@@ -25,8 +25,6 @@ export class AppHeaderComponent {
       });
     }
 
-    console.log(buttons);
-
     this.actionCtrl.create({
       title: this.app.values.get('global.change_lang', 'Select Your Language'),
       buttons

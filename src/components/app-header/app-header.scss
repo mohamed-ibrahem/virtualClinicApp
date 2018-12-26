@@ -6,6 +6,7 @@ app-header {
     padding-top: 7px;
     padding-bottom: 7px;
     text-align: center;
+    z-index: 100000000;
   }
 
   #language_selector {
@@ -13,6 +14,7 @@ app-header {
     right: 0;
     top: 0;
     color: color($colors, primary);
+    box-shadow: none;
     background: none !important;
   }
 }

@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {IonicPage, NavController, Slides} from 'ionic-angular';
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
 import {TabsPage} from "../tabs/tabs";
 

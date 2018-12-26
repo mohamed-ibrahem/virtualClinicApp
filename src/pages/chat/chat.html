@@ -1,0 +1,32 @@
+<ion-header>
+  <app-header [title]="messages.length ? user.name : ''">
+    <img *ngIf="messages.length" [src]="user.profile_pic" width="32" height="32" id="profile_pic">
+  </app-header>
+</ion-header>
+
+<ion-content padding [ngClass]="messages.length ? '' : 'no-messages'">
+  <div id="profile" *ngIf="! messages.length" text-center>
+    <div class="thumbnail">
+      <img [src]="user.profile_pic">
+    </div>
+    <h3 [ngClass]="user.isOnline ? 'online' : 'offline'">{{ user.name }}</h3>
+    <ion-badge *ngFor="let speciality of user.specialities">
+      {{ speciality.display_name }}
+    </ion-badge>
+    <p>{{ user.description }}</p>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <form [formGroup]="chat" (ngSubmit)="send()">
+    <ion-row>
+      <ion-col col-9>
+        <ion-input placeholder="Aa..." formControlName="message" type="text" autocomplete="off"></ion-input>
+      </ion-col>
+
+      <ion-col col-3>
+        <button ion-button>Send</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-footer>

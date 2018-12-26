@@ -1,0 +1,11 @@
+user-card {
+  ion-item-sliding {
+    box-shadow: 0 3px 5px darken(color($colors, light), 7.5%);
+    margin-bottom: 10px !important;
+
+    ion-item {
+      background-color: color($colors, light);
+      padding: 0 8px !important;
+    }
+  }
+}

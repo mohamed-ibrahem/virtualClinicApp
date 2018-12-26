@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
-import {HomePage} from "../home/home";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -14,13 +14,13 @@ export class MasterPage {
   }
 
   goTo(event, type) {
-    this.app.initApp();
-
-    if (type === 'app') {
-      this.app.auth.token.then(
-        token => this.navCtrl.push(HomePage),
-        () => this.navCtrl.push(LoginPage)
-      );
-    }
+    this.app.initApp().then(() => {
+      if (type === 'app') {
+        this.app.auth.token.then(
+          token => this.navCtrl.push(TabsPage),
+          () => this.navCtrl.push(LoginPage)
+        );
+      }
+    });
   }
 }

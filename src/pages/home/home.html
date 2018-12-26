@@ -1,9 +1,14 @@
 <ion-header>
   <app-header title="Virtual Clinic">
-    <ion-searchbar padding></ion-searchbar>
+    <ion-searchbar [ngClass]="search.trim().length ? 'has-search-data' : ''"
+                   (ionInput)="goToSearch()" [(ngModel)]="search" padding></ion-searchbar>
   </app-header>
 </ion-header>
 
-<ion-content padding text-center>
-  <h1>{{ app.values.get('pages.admin.home.description')}}</h1>
+<ion-content padding text-center [ngClass]="search.trim().length ? 'has-search-data' : ''">
+  <div id="searchData" *ngIf="searchData">
+    <ion-list no-lines>
+      <user-card *ngFor="let user of (searchData.users | withKeys)" [user]="user.value"></user-card>
+    </ion-list>
+  </div>
 </ion-content>

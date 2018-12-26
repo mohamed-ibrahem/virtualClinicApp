@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {TabsPage} from "../tabs/tabs";
 import {RegisterPage} from "../register/register";
 

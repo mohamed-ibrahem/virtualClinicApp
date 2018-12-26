@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpProvider} from "../helpers/http";
+import {HttpProvider} from "./http";
 import {Storage} from "@ionic/storage";
 
 @Injectable()

@@ -6,10 +6,26 @@ page-home {
         align-items: flex-end;
         background-image: url("../../assets/imgs/bg.jpg") !important;
         background-position: left top;
+        transition: all .4s ease-in-out;
+
+        &.has-search-data {
+          height: 44px;
+          padding: 6px 16px !important;
+          background-image: none !important;
+          background-color: darken(color($colors, light), 3%) !important;
+        }
       }
     }
   }
   ion-content {
+    > .scroll-content, > .fixed-content {
+      transition: margin-top .4s ease-in-out;
+    }
+
+    &.has-search-data > .scroll-content, &.has-search-data > .fixed-content {
+      margin-top: 85px !important;
+    }
+
     ion-card {
       position: relative;
       text-align: center;

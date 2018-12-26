@@ -1,0 +1,82 @@
+page-chat {
+  ion-header {
+    #profile_pic {
+      position: absolute;
+      top: 5px;
+      left: 35px;
+    }
+  }
+
+  ion-content {
+    .scroll-content {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &.no-messages .scroll-content {
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    #profile {
+      .thumbnail {
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 1px solid darken(color($colors, light), 2%);
+      }
+
+      ion-badge {
+        margin-bottom: 3px !important;
+      }
+
+      h3 {
+        position: relative;
+        margin: 5px 0 10px 0;
+
+        &:after {
+          content: '';
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          position: absolute;
+          top: -20px;
+          right: calc(50% - (35px));
+        }
+
+        &.online:after {
+          background-color: color($colors, secondary);
+          box-shadow: 0 0 10px color($colors, secondary);
+        }
+
+        &.offline:after {
+          background-color: color($colors, danger);
+          box-shadow: 0 0 10px color($colors, danger);
+        }
+      }
+    }
+  }
+
+  ion-footer {
+    background-color: darken(color($colors, light), 5%);
+
+    ion-row {
+      ion-col {
+        display: flex;
+        align-items: center;
+
+        ion-input {
+          background-color: color($colors, light);
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+        button {
+          max-height: 38px;
+        }
+      }
+    }
+  }
+}

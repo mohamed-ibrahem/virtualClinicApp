@@ -9,7 +9,7 @@ import {LoginPage} from "../pages/login/login";
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import {AuthProvider} from '../providers/auth/auth';
+import {AuthProvider} from '../providers/helpers/auth';
 import {HttpProvider} from '../providers/helpers/http';
 import {HttpClientModule} from "@angular/common/http";
 import {AppHeaderComponent} from "../components/app-header/app-header";
@@ -17,10 +17,13 @@ import {VirtualClinicApp} from "../providers/VirtualClinicApp";
 import {IonicStorageModule} from "@ionic/storage";
 import {Functions} from "../providers/helpers/functions";
 import {RegisterPage} from "../pages/register/register";
-import {Values} from "../providers/values";
+import {Values} from "../providers/helpers/values";
 import {MasterPage} from "../pages/master/master";
 import {WithKeysPipe} from "../pipes/with-keys/with-keys";
+import {UserProvider} from '../providers/models/user';
+import {UserCardComponent} from "../components/user-card/user-card";
 import {IonicSelectableModule} from "ionic-selectable";
+import {ChatPage} from "../pages/chat/chat";
 
 @NgModule({
   declarations: [
@@ -30,10 +33,12 @@ import {IonicSelectableModule} from "ionic-selectable";
     HomePage,
     LoginPage,
     RegisterPage,
+    ChatPage,
 
     WithKeysPipe,
 
-    AppHeaderComponent
+    AppHeaderComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import {IonicSelectableModule} from "ionic-selectable";
       scrollAssist: false,
       backButtonText: '',
       tabsPlacement: 'bottom',
-      swipeBackEnabled: true
+      swipeBackEnabled: true,
+      pageTransition: 'ios-transition'
     }),
     IonicSelectableModule
   ],
@@ -55,7 +61,8 @@ import {IonicSelectableModule} from "ionic-selectable";
     TabsPage,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ChatPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -65,7 +72,11 @@ import {IonicSelectableModule} from "ionic-selectable";
     HttpProvider,
     Functions,
     Values,
-    VirtualClinicApp
+    VirtualClinicApp,
+    UserProvider
+  ],
+  exports: [
+    UserCardComponent
   ]
 })
 export class AppModule {

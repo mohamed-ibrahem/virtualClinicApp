@@ -12,24 +12,28 @@
         <ion-label>
           <ion-icon name="ios-person-outline"></ion-icon>
         </ion-label>
-        <ion-input formControlName="username" type="email" placeholder="Email" autocomplete="on"></ion-input>
+        <ion-input formControlName="username" type="email" [placeholder]="app.values.get('general.email')" autocomplete="on"></ion-input>
       </ion-col>
       <ion-col col-12 *ngIf="! forgot">
         <ion-label>
           <ion-icon name="ios-unlock-outline"></ion-icon>
         </ion-label>
-        <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+        <ion-input formControlName="password" type="password" [placeholder]="app.values.get('general.password')"></ion-input>
       </ion-col>
 
       <ion-col col-12 text-right style="margin-bottom: 10px; margin-top: 5px;">
-        <a href="#" *ngIf="! forgot" (click)="goToForgotten()">Forget your password?</a>
-        <a href="#" *ngIf="forgot" (click)="goToForgotten(false)">Go to login</a>
+        <a href="#" *ngIf="! forgot" (click)="goToForgotten()">{{ app.values.get('pages.login.forgot.link') }}</a>
+        <a href="#" *ngIf="forgot" (click)="goToForgotten(false)">{{ app.values.get('pages.login.forgot.back') }}</a>
       </ion-col>
 
       <ion-col col-12>
         <button ion-button block
-                color="primary" type="submit"
-                [disabled]="!credentials.valid">{{ forgot ? 'Send Verification Code' : 'Login' }}
+                color="primary" type="submit" *ngIf="! forgot"
+                [disabled]="!credentials.valid">{{ app.values.get('pages.login.submit') }}
+        </button>
+        <button ion-button block
+                color="primary" type="submit" *ngIf="forgot"
+                [disabled]="!credentials.valid">{{ app.values.get('pages.login.forgot.submit') }}
         </button>
       </ion-col>
 
@@ -37,11 +41,11 @@
         <span style="display: block;text-align: center;color: #d0d0d0;margin: 20px 0;position: relative;">
           <span
             style="height: 1px;width: calc(50% - 20px);background-color: #ababab;display: inline-block;position: absolute;left: 0;top: 50%;"></span>
-          OR
+          {{ app.values.get('pages.login.register.or', 'OR') }}
           <span
             style="height: 1px;width: calc(50% - 20px);background-color: #ababab;display: inline-block;position: absolute;right: 0;top: 50%;"></span>
         </span>
-        <a ion-button block color="danger" (click)="goToRegister()">Register</a>
+        <a ion-button block color="danger" (click)="goToRegister()">{{ app.values.get('pages.login.register.title') }}</a>
       </ion-col>
     </ion-row>
   </form>

@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Functions} from "./functions";
 import 'rxjs/add/operator/finally';
@@ -7,14 +7,7 @@ import 'rxjs/add/operator/finally';
 export class HttpProvider {
   public url;
 
-  options = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, GET, PATCH, DELETE, PUT',
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    })
-  };
+  public options = {};
 
   constructor(public http: HttpClient, protected functions: Functions) {}
 
