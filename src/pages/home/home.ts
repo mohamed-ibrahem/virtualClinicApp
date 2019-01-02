@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
 import {UserProvider} from "../../providers/models/user";
 
@@ -12,18 +12,16 @@ export class HomePage {
   search = '';
   searchData : any;
 
-  constructor(public navCtrl: NavController, public app: VirtualClinicApp, public users: UserProvider)
-  {
-    this.getUser();
+  constructor(public navCtrl: NavController, navParams: NavParams, public app: VirtualClinicApp, public users: UserProvider) {
+    let search = navParams.get('search');
+    if (search) {
+      this.search = search;
+      this.searchAbout();
+    }
   }
 
-  getUser() {
-    this.users.auth
-      .subscribe((user) => this.user = user);
-  }
 
-  goToSearch() {
-    if (this.search.trim().length > 3)
+  searchAbout() {
     this.users.search(this.search.trim())
       .subscribe((data) => this.searchData = data.data);
   }

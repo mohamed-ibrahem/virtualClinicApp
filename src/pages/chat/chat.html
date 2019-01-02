@@ -10,7 +10,7 @@
       <img [src]="user.profile_pic">
     </div>
     <h3 [ngClass]="user.isOnline ? 'online' : 'offline'">{{ user.name }}</h3>
-    <ion-badge *ngFor="let speciality of user.specialities">
+    <ion-badge *ngFor="let speciality of user.specialities" (click)="searchAbout(speciality.display_name)">
       {{ speciality.display_name }}
     </ion-badge>
     <p>{{ user.description }}</p>

@@ -6,7 +6,7 @@ import {Storage} from "@ionic/storage";
 export class AuthProvider {
   protected data = {
     'client_id': 2,
-    'client_secret': 'Bv2J9hKFV5TPWabfrtlsueqjX3IQ0JtS1xctSj1P',
+    'client_secret': '6dMrMwxk8ufVt96XzGxg3zdYSbIHA07feQ8ceWX1',
     'grant_type': 'password'
   };
 

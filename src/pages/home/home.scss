@@ -13,6 +13,10 @@ page-home {
           padding: 6px 16px !important;
           background-image: none !important;
           background-color: darken(color($colors, light), 3%) !important;
+
+          &.searchbar-md {
+            height: 55px;
+          }
         }
       }
     }
@@ -25,26 +29,48 @@ page-home {
     &.has-search-data > .scroll-content, &.has-search-data > .fixed-content {
       margin-top: 85px !important;
     }
+    &.has-search-data.content-md > .scroll-content, &.content-md.has-search-data > .fixed-content {
+      margin-top: 95px !important;
+    }
 
-    ion-card {
-      position: relative;
-      text-align: center;
+    #searchData {
+      ion-list {
+        ion-item {
+          ion-scroll {
+            height: 20px;
+            white-space: nowrap;
 
-      .card-title {
-        position: absolute;
-        top: 36%;
-        font-size: 2.0em;
-        width: 100%;
-        font-weight: bold;
-        color: #fff;
-      }
+            .scroll-content {
+              padding: 0 !important;
+              margin: 0 !important;
 
-      .card-subtitle {
-        font-size: 1.0em;
-        position: absolute;
-        top: 52%;
-        width: 100%;
-        color: #fff;
+              .scroll-zoom-wrapper {
+                height: 100%;
+              }
+            }
+          }
+          ion-card {
+            position: relative;
+            text-align: center;
+
+            .card-title {
+              position: absolute;
+              top: 36%;
+              font-size: 2.0em;
+              width: 100%;
+              font-weight: bold;
+              color: #fff;
+            }
+
+            .card-subtitle {
+              font-size: 1.0em;
+              position: absolute;
+              top: 52%;
+              width: 100%;
+              color: #fff;
+            }
+          }
+        }
       }
     }
   }

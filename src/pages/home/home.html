@@ -1,13 +1,20 @@
 <ion-header>
   <app-header title="Virtual Clinic">
-    <ion-searchbar [ngClass]="search.trim().length ? 'has-search-data' : ''"
-                   (ionInput)="goToSearch()" [(ngModel)]="search" padding></ion-searchbar>
+    <ion-searchbar [ngClass]="search.trim().length ? 'has-search-data' : ''" [debounce]="600"
+                   (ionInput)="searchAbout()" [(ngModel)]="search" padding></ion-searchbar>
   </app-header>
 </ion-header>
 
 <ion-content padding text-center [ngClass]="search.trim().length ? 'has-search-data' : ''">
   <div id="searchData" *ngIf="searchData">
     <ion-list no-lines>
+      <ion-item *ngIf="(searchData.categories | withKeys).length">
+        <ion-scroll [scrollY]="false" [scrollX]="true" no-padding>
+          <ion-badge *ngFor="let category of (searchData.categories | withKeys)">
+            {{ category.value.display_name }}
+          </ion-badge>
+        </ion-scroll>
+      </ion-item>
       <user-card *ngFor="let user of (searchData.users | withKeys)" [user]="user.value"></user-card>
     </ion-list>
   </div>

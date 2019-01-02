@@ -15,6 +15,10 @@ export class TabsPage {
 
   constructor(public users: UserProvider) {}
 
+  ngOnInit(){
+    this.getUser()
+  }
+
   getUser() {
     this.users.auth
       .subscribe((user) => this.user = user);
