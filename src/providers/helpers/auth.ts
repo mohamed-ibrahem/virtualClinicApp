@@ -62,7 +62,7 @@ export class AuthProvider {
       this.storage.get('token').then((token) => {
         if (token) {
           this.storage.get('expiration').then((expiration) => {
-            if (expiration && expiration > Date.now()) {
+            if (expiration && parseInt(expiration) > Date.now()) {
               res(token);
             } else {
               this.destroyToken();

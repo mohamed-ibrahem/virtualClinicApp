@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
 import {FormBuilder, Validators} from "@angular/forms";
 import {HomePage} from "../home/home";
+import {UserProvider} from "../../providers/models/user";
 
 @IonicPage()
 @Component({
@@ -18,14 +19,34 @@ export class ChatPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public app: VirtualClinicApp,
+    public users: UserProvider,
     public fb: FormBuilder
   ) {
     this.user = this.navParams.get('user');
+    this.users.message.getAll(this.user.id)
+      .subscribe((data) => this.messages = data.messages);
 
     this.chat = this.fb.group({
       message: ['', Validators.required],
-      user_id: [this.user.id]
+      user: [this.user.id]
     })
+  }
+
+  send() {
+    this.users.message.send(this.chat.value).subscribe((data) => {
+      if (data.status)
+        this.messages.push({
+          type: 'outgoing',
+          message: data.status.message
+        });
+    });
+  }
+
+  getClasses(messageType) {
+    return {
+      incoming: messageType === 'incoming',
+      outgoing: messageType === 'outgoing',
+    };
   }
 
   searchAbout(speciality) {

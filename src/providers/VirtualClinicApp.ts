@@ -5,6 +5,7 @@ import {AuthProvider} from "./helpers/auth";
 import {Functions} from "./helpers/functions";
 import {Values} from "./helpers/values";
 import {HttpHeaders} from "@angular/common/http";
+import {PusherProvider} from "./helpers/pusher";
 
 @Injectable()
 export class VirtualClinicApp {
@@ -24,7 +25,8 @@ export class VirtualClinicApp {
     public auth: AuthProvider,
     public values: Values,
     public functions: Functions,
-    public storage: Storage
+    public storage: Storage,
+    public pusher: PusherProvider
   ) {
   }
 

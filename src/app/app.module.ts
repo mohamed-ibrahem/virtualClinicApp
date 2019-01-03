@@ -24,6 +24,8 @@ import {UserProvider} from '../providers/models/user';
 import {UserCardComponent} from "../components/user-card/user-card";
 import {IonicSelectableModule} from "ionic-selectable";
 import {ChatPage} from "../pages/chat/chat";
+import {MessageProvider} from "../providers/models/message";
+import {PusherProvider} from "../providers/helpers/pusher";
 
 @NgModule({
   declarations: [
@@ -72,8 +74,10 @@ import {ChatPage} from "../pages/chat/chat";
     HttpProvider,
     Functions,
     Values,
+    PusherProvider,
     VirtualClinicApp,
-    UserProvider
+    UserProvider,
+    MessageProvider
   ],
   exports: [
     UserCardComponent
