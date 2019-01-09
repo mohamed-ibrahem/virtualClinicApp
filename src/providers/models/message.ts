@@ -3,12 +3,7 @@ import {VirtualClinicApp} from "../VirtualClinicApp";
 
 @Injectable()
 export class MessageProvider {
-  channel;
-
   constructor(public app: VirtualClinicApp) {}
-
-  setAuth(user) {
-  }
 
   getAll(id) {
     return this.app.http.get(`api/users/messages/${id}`);
@@ -16,5 +11,9 @@ export class MessageProvider {
 
   send(data) {
     return this.app.http.post('api/users/messages', data);
+  }
+
+  seen(conversation) {
+    return this.app.http.post('api/users/conversation/seen', {conversation});
   }
 }

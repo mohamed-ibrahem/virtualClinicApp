@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content padding text-center [ngClass]="search.trim().length ? 'has-search-data' : ''">
-  <div id="searchData" *ngIf="searchData">
+  <div id="searchData" *ngIf="searchData && search.trim().length">
     <ion-list no-lines>
       <ion-item *ngIf="(searchData.categories | withKeys).length">
         <ion-scroll [scrollY]="false" [scrollX]="true" no-padding>
@@ -17,5 +17,8 @@
       </ion-item>
       <user-card *ngFor="let user of (searchData.users | withKeys)" [user]="user.value"></user-card>
     </ion-list>
+  </div>
+  <div id="no-data" *ngIf="! searchData && search.trim().length">
+    No Data!!
   </div>
 </ion-content>

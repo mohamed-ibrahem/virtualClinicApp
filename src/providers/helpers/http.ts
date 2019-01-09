@@ -1,15 +1,29 @@
-import {HttpClient} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Functions} from "./functions";
 import 'rxjs/add/operator/finally';
+import {Events} from "ionic-angular";
 
 @Injectable()
 export class HttpProvider {
   public url;
 
-  public options = {};
+  public options = {
+    headers: new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, GET, PATCH, DELETE, PUT',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    })
+  };
 
-  constructor(public http: HttpClient, protected functions: Functions) {}
+  constructor(public http: HttpClient, protected events: Events, protected functions: Functions) {
+    this.events.subscribe('user:loggedIn', (token) => this.setTokenToHeaders(token));
+  }
+
+  setTokenToHeaders(token) {
+    this.options.headers = this.options.headers.append('Authorization', `Bearer ${token}`);
+  }
 
   setUrl() {
     return new Promise(res => {
@@ -41,13 +55,17 @@ export class HttpProvider {
       return this.http.get(
         this.url + '/' + uri,
         Object.assign(options, this.options)
-      )._finally(() => {this.functions.clearLoading(uri)});
+      )._finally(() => {
+        this.functions.clearLoading(uri)
+      });
 
     return this.http[type](
       this.url + '/' + uri,
       data,
       Object.assign(options, this.options)
-    )._finally(() => {this.functions.clearLoading(uri)});
+    )._finally(() => {
+      this.functions.clearLoading(uri)
+    });
   }
 
   public post(uri, data, options = {}) {

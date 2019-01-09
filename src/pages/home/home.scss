@@ -30,12 +30,19 @@ page-home {
       margin-top: 85px !important;
     }
     &.has-search-data.content-md > .scroll-content, &.content-md.has-search-data > .fixed-content {
-      margin-top: 95px !important;
+      margin-top: 112px !important;
     }
 
     #searchData {
       ion-list {
         ion-item {
+          padding: 0 !important;
+
+          .item-inner, ion-label {
+            margin: 0;
+            padding: 0;
+          }
+
           ion-scroll {
             height: 20px;
             white-space: nowrap;

@@ -2,7 +2,6 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {IonicPage, NavController, Slides} from 'ionic-angular';
 import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
-import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -66,13 +65,8 @@ export class RegisterPage {
       password_confirmation: this.form.value.register[1].password_confirmation,
       description: this.form.value.register[2].description
     }).then(
-      () => {
-        this.app.presentToast(this.app.values.get('auth.success'));
-        this.navCtrl.setRoot(TabsPage);
-      },
-      (error) => {
-        this.app.presentToast(error.message);
-      });
+      () => this.app.presentToast(this.app.values.get('auth.success')),
+      (error) => this.app.presentToast(error.message));
   }
 
   slideChanged() {

@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
 import {FormBuilder, Validators} from "@angular/forms";
-import {TabsPage} from "../tabs/tabs";
 import {RegisterPage} from "../register/register";
 
 @IonicPage()
@@ -26,12 +25,11 @@ export class LoginPage {
   }
 
   login() {
-    this.app.auth.login(this.credentials.value).then(() => {
-      this.app.presentToast(this.app.values.get('auth.success'));
-      this.navCtrl.setRoot(TabsPage);
-    }, (error) => this.app.presentToast(error.message, {
-      duration: 2500
-    }));
+    this.app.auth.login(this.credentials.value).then(
+      () => this.app.presentToast(this.app.values.get('auth.success')),
+      (error) => this.app.presentToast(error.message, {
+        duration: 2500
+      }));
   }
 
   forgotten() {

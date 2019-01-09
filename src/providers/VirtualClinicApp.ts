@@ -4,22 +4,10 @@ import {Storage} from "@ionic/storage";
 import {AuthProvider} from "./helpers/auth";
 import {Functions} from "./helpers/functions";
 import {Values} from "./helpers/values";
-import {HttpHeaders} from "@angular/common/http";
 import {PusherProvider} from "./helpers/pusher";
 
 @Injectable()
 export class VirtualClinicApp {
-  private config = {
-    options: {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, GET, PATCH, DELETE, PUT',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      })
-    }
-  };
-
   constructor(
     public http: HttpProvider,
     public auth: AuthProvider,
@@ -33,21 +21,14 @@ export class VirtualClinicApp {
   initApp() {
     return new Promise(res => {
       this.http.setUrl().then(() => {
-        this.http.get('api/configure', this.config.options)
+        this.http.get('api/configure')
           .subscribe((data) => {
             this.values.update(data);
 
-            this.auth.token
-              .then((token) => {
-                this.config.options.headers = this.config.options.headers.append('Authorization', 'Bearer ' + token);
-
-                this.http.options = this.config.options;
-                res(true);
-              }, () => {
-                this.http.options = this.config.options;
-                res(true);
-              });
-
+            this.auth.token.then((token) => {
+              this.http.setTokenToHeaders(token);
+              res(true);
+            }, () => res(true));
           });
       });
     })

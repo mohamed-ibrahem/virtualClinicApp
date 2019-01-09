@@ -13,10 +13,10 @@ export class UserCardComponent {
   constructor(public app: VirtualClinicApp, public navCtrl: NavController) {}
 
   goToChat() {
-    this.app.http.get('api/users/' + this.user.id).subscribe((user) => {
-      this.navCtrl.push(ChatPage,  {
-        user: user.data
-      })
-    })
+    this.navCtrl.push(ChatPage,  {
+      user: this.user
+    });
+
+    return true;
   }
 }

@@ -4,11 +4,7 @@ import {MessageProvider} from "./message";
 
 @Injectable()
 export class UserProvider {
-  constructor(public app: VirtualClinicApp, public message: MessageProvider) {
-    this.auth.subscribe((data) => {
-      this.message.setAuth(data);
-    })
-  }
+  constructor(public app: VirtualClinicApp, public message: MessageProvider) {}
 
   get auth() {
     return this.app.http.get('api/users/getCurrent');

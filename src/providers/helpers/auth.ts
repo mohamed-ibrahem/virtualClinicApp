@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpProvider} from "./http";
 import {Storage} from "@ionic/storage";
+import {Events} from "ionic-angular";
 
 @Injectable()
 export class AuthProvider {
   protected data = {
     'client_id': 2,
-    'client_secret': '6dMrMwxk8ufVt96XzGxg3zdYSbIHA07feQ8ceWX1',
+    'client_secret': 'oYMAxE0w6mHkGufO0Jl0C5ADC6RG4ChO9zw1MYTf',
     'grant_type': 'password'
   };
 
-  constructor(public storage: Storage, public http: HttpProvider) {
+  constructor(public storage: Storage, public events: Events, public http: HttpProvider) {
   }
 
   login(credentials) {
@@ -48,13 +49,18 @@ export class AuthProvider {
   setToken(token, expiration) {
     this.storage.set('token', token)
       .then(() => {
-        this.storage.set('expiration', expiration);
+        this.storage.set('expiration', expiration).then(() => {
+          this.events.unsubscribe('user:loggedOut');
+          this.events.publish('user:loggedIn', token);
+        });
       });
   }
 
   destroyToken() {
     this.storage.remove('token');
     this.storage.remove('expiration');
+    this.events.unsubscribe('user:loggedIn');
+    this.events.publish('user:loggedOut');
   }
 
   get token() {
@@ -74,9 +80,5 @@ export class AuthProvider {
         }
       });
     });
-  }
-
-  get user() {
-    return null;
   }
 }

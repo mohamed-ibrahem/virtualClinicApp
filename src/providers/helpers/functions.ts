@@ -9,7 +9,8 @@ export class Functions {
     public alert: AlertController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController
-  ) {}
+  ) {
+  }
 
   presentAlert(title, text, options) {
     return this.alert.create(Object.assign({
@@ -30,10 +31,12 @@ export class Functions {
   loading(name) {
     this.queries.push(name);
   }
+
   clearLoading(name?) {
     if (name) this.queries.splice(name, 1);
     else this.queries = [];
   }
+
   get isLoading(): boolean {
     return !!this.queries.length;
   }

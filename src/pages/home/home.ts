@@ -10,7 +10,7 @@ import {UserProvider} from "../../providers/models/user";
 export class HomePage {
   user = {};
   search = '';
-  searchData : any;
+  searchData : any = [];
 
   constructor(public navCtrl: NavController, navParams: NavParams, public app: VirtualClinicApp, public users: UserProvider) {
     let search = navParams.get('search');
@@ -19,7 +19,6 @@ export class HomePage {
       this.searchAbout();
     }
   }
-
 
   searchAbout() {
     this.users.search(this.search.trim())

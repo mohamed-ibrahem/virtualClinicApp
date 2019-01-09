@@ -1,10 +1,13 @@
 <ion-header>
-  <app-header [title]="messages.length ? user.name : ''">
-    <img *ngIf="messages.length" [src]="user.profile_pic" width="32" height="32" id="profile_pic">
+  <app-header>
+    <div id="header_container">
+      <img [src]="user.profile_pic" />
+      <h3 [ngClass]="user.isOnline ? 'online' : 'offline'">{{ user.name }}<small>{{ user.isOnline ? 'Online' : 'Offline' }}</small></h3>
+    </div>
   </app-header>
 </ion-header>
 
-<ion-content padding [ngClass]="messages.length ? '' : 'no-messages'">
+<ion-content [ngClass]="messages.length ? '' : 'no-messages'">
   <div id="profile" *ngIf="! messages.length" text-center>
     <div class="thumbnail">
       <img [src]="user.profile_pic">
@@ -16,13 +19,13 @@
     <p>{{ user.description }}</p>
   </div>
 
-  <div class="main" *ngIf="messages.length">
-    <div class="chat-box">
-      <div class="message-area">
-        <div class="message" *ngFor="let message of messages" [ngClass]="getClasses(message.type)">
-          <p>{{ message.text }}</p>
-        </div>
-      </div>
+  <div class="chat-box" padding-horizontal *ngIf="messages.length">
+    <div class="message" *ngFor="let message of messages" [ngClass]="message.sender !== user.id ? 'outgoing' : 'incoming'">
+      <p dir="rtl">{{ message.message }}
+        <span *ngIf="message.sender !== user.id" [ngClass]="message.isSeen ? 'seen' : ''">
+          <ion-icon name="ios-checkmark"></ion-icon>
+        </span>
+      </p>
     </div>
   </div>
 </ion-content>
@@ -30,12 +33,12 @@
 <ion-footer>
   <form [formGroup]="chat" (ngSubmit)="send()">
     <ion-row>
-      <ion-col col-9>
+      <ion-col col-10>
         <ion-input placeholder="Aa..." formControlName="message" type="text" autocomplete="off"></ion-input>
       </ion-col>
 
-      <ion-col col-3>
-        <button ion-button>
+      <ion-col col-2>
+        <button ion-button block>
           <ion-icon name="send"></ion-icon>
         </button>
       </ion-col>
