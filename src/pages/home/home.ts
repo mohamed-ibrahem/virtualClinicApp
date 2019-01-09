@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {ModalController, NavController, NavParams} from 'ionic-angular';
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
 import {UserProvider} from "../../providers/models/user";
 
@@ -8,20 +8,41 @@ import {UserProvider} from "../../providers/models/user";
   templateUrl: 'home.html'
 })
 export class HomePage {
-  user = {};
   search = '';
-  searchData : any = [];
+  searchData : any = {};
+  withoutCategories = false;
 
-  constructor(public navCtrl: NavController, navParams: NavParams, public app: VirtualClinicApp, public users: UserProvider) {
+  constructor(
+    public navCtrl: NavController,
+    navParams: NavParams,
+    public app: VirtualClinicApp,
+    public users: UserProvider,
+    public modal: ModalController
+  ) {
     let search = navParams.get('search');
+    this.withoutCategories = navParams.get('withoutCategories');
+
     if (search) {
-      this.search = search;
-      this.searchAbout();
+      this.openWith(search)
     }
   }
 
   searchAbout() {
+    if (this.search.trim().length == 0) {
+      this.withoutCategories = false;
+      this.searchData = {};
+
+      return;
+    }
+
     this.users.search(this.search.trim())
-      .subscribe((data) => this.searchData = data.data);
+      .subscribe((data) => {
+        this.searchData = data.data;
+      });
+  }
+
+  openWith(category) {
+    this.search = category;
+    this.searchAbout()
   }
 }

@@ -34,17 +34,7 @@ export class ChatPage {
         this.pusher.init(`private-conversation-${data.messages.id}`, data.options)
           .bind('App\\Events\\MessageSent', (response) => {
             this.messages.push(response.message);
-            this.users.message.seen(data.messages.id);
           });
-
-        this.messages.forEach((message) => {
-          this.pusher.init(`private-message-${message.id}-seen`, data.options)
-            .bind('App\\Events\\MessageSeen', () => {
-              this.messages.forEach((message) => {
-                message.isSeen = true;
-              });
-            });
-        })
       });
 
     this.chat = this.fb.group({
@@ -61,7 +51,8 @@ export class ChatPage {
 
   searchAbout(speciality) {
     this.navCtrl.setRoot(HomePage, {
-      search: speciality
+      search: speciality,
+      withoutCategories: true
     }, {
       animate: true
     })

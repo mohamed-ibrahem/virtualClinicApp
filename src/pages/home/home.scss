@@ -36,7 +36,9 @@ page-home {
     #searchData {
       ion-list {
         ion-item {
-          padding: 0 !important;
+          &:first-of-type {
+            padding: 0 !important;
+          }
 
           .item-inner, ion-label {
             margin: 0;
@@ -44,7 +46,7 @@ page-home {
           }
 
           ion-scroll {
-            height: 20px;
+            height: 40px;
             white-space: nowrap;
 
             .scroll-content {
@@ -53,6 +55,10 @@ page-home {
 
               .scroll-zoom-wrapper {
                 height: 100%;
+
+                ion-badge {
+                  margin-right: 3px;
+                }
               }
             }
           }
@@ -79,6 +85,15 @@ page-home {
           }
         }
       }
+    }
+    #no-data {
+      display: flex;
+      width: 100%;
+      height: calc(100% - 60px);
+      align-items: center;
+      justify-content: center;
+      color: color($colors, danger);
+      font-size: 18px;
     }
   }
 }
