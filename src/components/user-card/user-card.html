@@ -46,7 +46,7 @@
   <ion-item>
     <rating [rate]="user.rating" [type]="type"></rating>
   </ion-item>
-  <button *ngIf="type !== 'chat'" ion-item (click)="goToChat()">
+  <button *ngIf="type !== 'rate-now'" ion-item (click)="goToChat()">
     Chat
   </button>
 </ion-card>
