@@ -24,23 +24,23 @@
 
   <div id="home" *ngIf="! search.trim().length">
     <ion-list no-lines>
-      <ion-item>
+      <ion-item *ngIf="users.auth?.messages?.unCompleted.length">
         <h2>Complete the conversations</h2>
       </ion-item>
 
       <user-card *ngFor="let _user of users.auth?.messages?.unCompleted" [user]="_user.with"></user-card>
 
-      <ion-item>
+      <ion-item *ngIf="oldData.users.length">
         <h2>You may like..</h2>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="oldData.users.length">
         <ion-scroll [scrollY]="false" [scrollX]="true" no-padding>
           <user-card *ngFor="let _user of (oldData.users | withKeys)" view="card" [user]="_user.value"></user-card>
         </ion-scroll>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="users.auth?.messages?.completed.length">
         <h2>Rate the doctors</h2>
       </ion-item>
 

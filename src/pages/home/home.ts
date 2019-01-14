@@ -11,7 +11,7 @@ export class HomePage {
   search = '';
   searchData: any;
   withoutCategories = false;
-  oldData: any = {};
+  oldData: any = {users: []};
   complete: any;
 
   constructor(
@@ -29,7 +29,10 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.app.storage.get('userSearchAbout')
-      .then((data) => this.oldData = data);
+      .then((data) => {
+		  if ( data )
+	  this.oldData = data
+	  });
   }
 
   searchAbout() {
