@@ -1,7 +1,7 @@
 <ion-header>
   <app-header title="Virtual Clinic">
-    <ion-searchbar [ngClass]="search.trim().length ? 'has-search-data' : ''" [debounce]="600"
-                   (ionInput)="searchAbout()" [(ngModel)]="search" padding></ion-searchbar>
+    <ion-searchbar [class.without-input]="users.auth?.isDoctor" [class.has-search-data]="search.trim().length"
+                   [debounce]="600" (ionInput)="searchAbout()" [(ngModel)]="search" padding></ion-searchbar>
   </app-header>
 </ion-header>
 
@@ -18,7 +18,33 @@
       <user-card *ngFor="let user of (searchData.users | withKeys)" [user]="user.value"></user-card>
     </ion-list>
   </div>
-  <div id="no-data" *ngIf="((searchData.users && searchData.categories) && (!searchData.users.length && !searchData.categories.length)) && search.trim().length">
+  <div id="no-data" *ngIf="searchData && ((searchData.users && searchData.categories) && !searchData.users.length) && search.trim().length">
     No Data!!
+  </div>
+
+  <div id="home" *ngIf="! search.trim().length">
+    <ion-list no-lines>
+      <ion-item>
+        <h2>Complete the conversations</h2>
+      </ion-item>
+
+      <user-card *ngFor="let _user of users.auth?.messages?.unCompleted" [user]="_user.with"></user-card>
+
+      <ion-item>
+        <h2>You may like..</h2>
+      </ion-item>
+
+      <ion-item>
+        <ion-scroll [scrollY]="false" [scrollX]="true" no-padding>
+          <user-card *ngFor="let _user of (oldData.users | withKeys)" view="card" [user]="_user.value"></user-card>
+        </ion-scroll>
+      </ion-item>
+
+      <ion-item>
+        <h2>Rate the doctors</h2>
+      </ion-item>
+
+      <user-card *ngFor="let _user of users.auth?.messages?.completed" view="card" type="rate-now" [user]="_user.with"></user-card>
+    </ion-list>
   </div>
 </ion-content>

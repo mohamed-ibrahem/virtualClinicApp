@@ -1,0 +1,12 @@
+<ion-header>
+  <app-header title="Messagess"></app-header>
+</ion-header>
+
+<ion-content padding>
+  <ion-list no-lines>
+    <user-card *ngFor="let message of users.auth.messages.completed"
+               [description]="message.messages[message.messages.length - 1]?.message"
+               [class.active]="message.hasNewMessage"
+               [user]="message.with"></user-card>
+  </ion-list>
+</ion-content>

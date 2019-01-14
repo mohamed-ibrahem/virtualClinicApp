@@ -9,6 +9,9 @@ import {ChatPage} from "../../pages/chat/chat";
 })
 export class UserCardComponent {
   @Input('user') user : any = {};
+  @Input('description') description : any = '';
+  @Input('view') view : any = 'item';
+  @Input('type') type : any = 'show';
 
   constructor(public app: VirtualClinicApp, public navCtrl: NavController) {}
 

@@ -47,6 +47,9 @@ page-chat {
           }
         }
       }
+      .toolbar-ios {
+        min-height: 60px;
+      }
     }
   }
 
@@ -54,6 +57,7 @@ page-chat {
     .scroll-content {
       display: flex;
       align-items: flex-end;
+      flex-wrap: wrap;
     }
 
     &.no-messages .scroll-content {
@@ -100,52 +104,46 @@ page-chat {
         }
       }
     }
+    .message {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
 
-    .chat-box {
-      height: 100%;
-      width: 100%;
-      overflow-x: auto;
-
-      .message {
-        display: flex;
-        flex-direction: column;
+      p {
+        color: #8a898b;
+        max-width: 95%;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+        padding: 10px 15px 10px 7px;
+        margin: 5px 0;
+        background: #f0f0f0;
+        text-align: right;
+      }
+      &.incoming {
+        justify-content: flex-start;
+        align-items: flex-start;
 
         p {
-          color: #8a898b;
-          max-width: 95%;
-          box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-          padding: 10px 15px 10px 7px;
-          margin: 5px 0;
-          background: #f0f0f0;
-          text-align: right;
+          color: #fff;
+          border-radius: 0 11px 11px 11px;
+          background: color($colors, primary);
         }
-        &.incoming {
-          justify-content: flex-start;
-          align-items: flex-start;
+      }
+      &.outgoing {
+        justify-content: flex-end;
+        align-items: flex-end;
 
-          p {
-            color: #fff;
-            border-radius: 0 11px 11px 11px;
-            background: color($colors, primary);
-          }
-        }
-        &.outgoing {
-          justify-content: flex-end;
-          align-items: flex-end;
+        p {
+          border-radius: 11px 11px 0 11px;
+          padding-right: 20px;
 
-          p {
-            border-radius: 11px 11px 0 11px;
-            padding-right: 20px;
+          span {
+            float: right;
+            padding-left: 7px;
+            margin-right: -10px;
+            color: #cdcdcd;
 
-            span {
-              float: right;
-              padding-left: 7px;
-              margin-right: -10px;
-              color: #cdcdcd;
-
-              &.seen {
-                color: color($colors, primary);
-              }
+            &.seen {
+              color: color($colors, primary);
             }
           }
         }

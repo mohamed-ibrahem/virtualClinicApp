@@ -1,5 +1,11 @@
 <ion-tabs>
-  <ion-tab [root]="Home" tabTitle="Home" tabIcon="home"></ion-tab>
-  <ion-tab [root]="Account" tabTitle="Messages" [tabBadge]="0" tabBadgeStyle="danger" tabIcon="chatbubbles"></ion-tab>
+  <ion-tab [tabsHideOnSubPages]="true" [root]="Home" tabTitle="Home" tabIcon="home"></ion-tab>
+
+  <ion-tab [tabsHideOnSubPages]="true" [root]="Message" tabTitle="Messages" [tabBadge]="users.auth?.messages?.completed.length"
+           tabBadgeStyle="danger" tabIcon="chatbubbles"></ion-tab>
+
+  <ion-tab [tabsHideOnSubPages]="true" [root]="Message" tabTitle="Notifications" [tabBadge]="users.auth?.notification?.length"
+           [show]="users.auth?.isDoctor" tabBadgeStyle="danger" tabIcon="notifications"></ion-tab>
+
   <ion-tab [root]="Account" tabTitle="Account" tabIcon="contact"></ion-tab>
 </ion-tabs>

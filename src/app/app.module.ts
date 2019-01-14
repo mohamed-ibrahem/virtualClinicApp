@@ -12,7 +12,6 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {AuthProvider} from '../providers/helpers/auth';
 import {HttpProvider} from '../providers/helpers/http';
 import {HttpClientModule} from "@angular/common/http";
-import {AppHeaderComponent} from "../components/app-header/app-header";
 import {VirtualClinicApp} from "../providers/VirtualClinicApp";
 import {IonicStorageModule} from "@ionic/storage";
 import {Functions} from "../providers/helpers/functions";
@@ -21,11 +20,13 @@ import {Values} from "../providers/helpers/values";
 import {MasterPage} from "../pages/master/master";
 import {WithKeysPipe} from "../pipes/with-keys/with-keys";
 import {UserProvider} from '../providers/models/user';
-import {UserCardComponent} from "../components/user-card/user-card";
 import {IonicSelectableModule} from "ionic-selectable";
 import {ChatPage} from "../pages/chat/chat";
 import {MessageProvider} from "../providers/models/message";
 import {PusherProvider} from "../providers/helpers/pusher";
+import {ComponentsModule} from "../components/components.module";
+import {AccountPage} from "../pages/account/account";
+import {MessagesPage} from "../pages/messages/messages";
 
 @NgModule({
   declarations: [
@@ -36,11 +37,10 @@ import {PusherProvider} from "../providers/helpers/pusher";
     LoginPage,
     RegisterPage,
     ChatPage,
+    AccountPage,
+    MessagesPage,
 
-    WithKeysPipe,
-
-    AppHeaderComponent,
-    UserCardComponent
+    WithKeysPipe
   ],
   imports: [
     BrowserModule,
@@ -54,7 +54,8 @@ import {PusherProvider} from "../providers/helpers/pusher";
       swipeBackEnabled: true,
       pageTransition: 'ios-transition'
     }),
-    IonicSelectableModule
+    IonicSelectableModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,7 +65,9 @@ import {PusherProvider} from "../providers/helpers/pusher";
     HomePage,
     LoginPage,
     RegisterPage,
-    ChatPage
+    ChatPage,
+    AccountPage,
+    MessagesPage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -78,9 +81,6 @@ import {PusherProvider} from "../providers/helpers/pusher";
     VirtualClinicApp,
     UserProvider,
     MessageProvider
-  ],
-  exports: [
-    UserCardComponent
   ]
 })
 export class AppModule {

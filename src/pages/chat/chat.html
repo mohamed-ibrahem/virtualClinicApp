@@ -7,7 +7,7 @@
   </app-header>
 </ion-header>
 
-<ion-content [ngClass]="messages.length ? '' : 'no-messages'">
+<ion-content padding [ngClass]="messages.length ? '' : 'no-messages'">
   <div id="profile" *ngIf="! messages.length" text-center>
     <div class="thumbnail">
       <img [src]="user.profile_pic">
@@ -19,14 +19,12 @@
     <p>{{ user.description }}</p>
   </div>
 
-  <div class="chat-box" padding-horizontal *ngIf="messages.length">
-    <div class="message" *ngFor="let message of messages" [ngClass]="message.sender !== user.id ? 'outgoing' : 'incoming'">
-      <p dir="rtl">{{ message.message }}
-        <span *ngIf="message.sender !== user.id" [ngClass]="message.isSeen ? 'seen' : ''">
-          <ion-icon name="ios-checkmark"></ion-icon>
-        </span>
-      </p>
-    </div>
+  <div class="message" *ngFor="let message of messages" [ngClass]="message.sender !== user.id ? 'outgoing' : 'incoming'">
+    <p dir="rtl">{{ message.message }}
+      <span *ngIf="message.sender !== user.id" [ngClass]="message.isSeen ? 'seen' : ''">
+        <ion-icon name="ios-checkmark"></ion-icon>
+      </span>
+    </p>
   </div>
 </ion-content>
 

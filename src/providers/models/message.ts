@@ -5,6 +5,10 @@ import {VirtualClinicApp} from "../VirtualClinicApp";
 export class MessageProvider {
   constructor(public app: VirtualClinicApp) {}
 
+  auth() {
+    return this.app.http.get('api/users/messages');
+  }
+
   getAll(id) {
     return this.app.http.get(`api/users/messages/${id}`);
   }

@@ -1,0 +1,16 @@
+page-messages {
+  ion-content {
+    ion-list {
+      user-card {
+        &.active {
+          ion-item-sliding {
+
+            ion-item {
+              background-color: #fff5ca;
+            }
+          }
+        }
+      }
+    }
+  }
+}

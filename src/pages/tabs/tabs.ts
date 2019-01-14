@@ -1,26 +1,17 @@
 import { Component } from '@angular/core';
 
-import { HomePage } from '../home/home';
-import {LoginPage} from "../login/login";
 import {UserProvider} from "../../providers/models/user";
+import { HomePage } from '../home/home';
+import {AccountPage} from "../account/account";
+import {MessagesPage} from "../messages/messages";
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
   Home = HomePage;
-  Account = LoginPage;
+  Account = AccountPage;
+  Message = MessagesPage;
 
-  user = {};
-
-  constructor(public users: UserProvider) {}
-
-  ngOnInit(){
-    this.getUser()
-  }
-
-  getUser() {
-    this.users.auth
-      .subscribe((user) => this.user = user);
-  }
+  constructor (public users: UserProvider) {}
 }

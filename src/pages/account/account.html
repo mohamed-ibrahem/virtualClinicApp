@@ -1,0 +1,28 @@
+<ion-header>
+  <app-header title="Account Settings"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="account">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Gender</ion-label>
+        <ion-select placeholder="Gender" formControlName="gender">
+          <ion-option value="0">Male</ion-option>
+          <ion-option value="1">Female</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <button ion-item color="primary">
+        Save
+      </button>
+    </ion-list>
+
+    <button ion-button color="danger" block (click)="logout()">LogOut</button>
+  </form>
+</ion-content>

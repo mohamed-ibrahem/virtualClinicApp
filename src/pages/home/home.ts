@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {ModalController, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavParams} from 'ionic-angular';
 import {VirtualClinicApp} from "../../providers/VirtualClinicApp";
 import {UserProvider} from "../../providers/models/user";
 
@@ -9,15 +9,15 @@ import {UserProvider} from "../../providers/models/user";
 })
 export class HomePage {
   search = '';
-  searchData : any = {};
+  searchData: any;
   withoutCategories = false;
+  oldData: any = {};
+  complete: any;
 
   constructor(
-    public navCtrl: NavController,
     navParams: NavParams,
-    public app: VirtualClinicApp,
     public users: UserProvider,
-    public modal: ModalController
+    public app: VirtualClinicApp
   ) {
     let search = navParams.get('search');
     this.withoutCategories = navParams.get('withoutCategories');
@@ -25,6 +25,11 @@ export class HomePage {
     if (search) {
       this.openWith(search)
     }
+  }
+
+  ionViewDidEnter() {
+    this.app.storage.get('userSearchAbout')
+      .then((data) => this.oldData = data);
   }
 
   searchAbout() {
@@ -38,11 +43,24 @@ export class HomePage {
     this.users.search(this.search.trim())
       .subscribe((data) => {
         this.searchData = data.data;
+
+        this.app.storage.set('userSearchAbout', {
+          users: this.checkArray(this.oldData.users.concat(data.data.users)),
+        })
+          .then(() => {
+            this.app.storage.get('userSearchAbout')
+              .then((data) => this.oldData = data);
+          });
       });
   }
 
   openWith(category) {
     this.search = category;
+    this.withoutCategories = true;
     this.searchAbout()
+  }
+
+  private checkArray(array: any) {
+    return array.slice(Math.floor(Math.random() * array.length), 10);
   }
 }

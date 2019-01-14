@@ -50,7 +50,6 @@ export class AuthProvider {
     this.storage.set('token', token)
       .then(() => {
         this.storage.set('expiration', expiration).then(() => {
-          this.events.unsubscribe('user:loggedOut');
           this.events.publish('user:loggedIn', token);
         });
       });
@@ -59,8 +58,11 @@ export class AuthProvider {
   destroyToken() {
     this.storage.remove('token');
     this.storage.remove('expiration');
-    this.events.unsubscribe('user:loggedIn');
     this.events.publish('user:loggedOut');
+  }
+
+  logout() {
+    this.destroyToken();
   }
 
   get token() {
