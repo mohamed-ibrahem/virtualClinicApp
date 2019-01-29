@@ -9,5 +9,6 @@ import {UserProvider} from "../../providers/models/user";
 })
 export class MessagesPage {
   constructor(public users: UserProvider) {
+    this.users.getAuth();
   }
 }

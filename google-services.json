@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "120767050996",
+    "firebase_url": "https://virtual-clinic-220823.firebaseio.com",
+    "project_id": "virtual-clinic-220823",
+    "storage_bucket": "virtual-clinic-220823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120767050996:android:d6554bc93698da87",
+        "android_client_info": {
+          "package_name": "com.virtualClinic.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120767050996-3iouekg2ru95bc2rhqc51rrnto6iftf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXi_1uMN-aZ7mLk2qwjlvRfBLLPmfZCmE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

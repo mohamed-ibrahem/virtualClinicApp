@@ -16,5 +16,9 @@ app-header {
     color: color($colors, primary);
     box-shadow: none;
     background: none !important;
+
+    &.button-ios {
+      top: -3px;
+    }
   }
 }

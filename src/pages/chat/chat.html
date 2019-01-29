@@ -1,8 +1,10 @@
 <ion-header>
   <app-header>
     <div id="header_container">
-      <img [src]="user.profile_pic" />
-      <h3 [ngClass]="user.isOnline ? 'online' : 'offline'">{{ user.name }}<small>{{ user.isOnline ? 'Online' : 'Offline' }}</small></h3>
+      <img [src]="user.profile_pic"/>
+      <h3 [ngClass]="user.isOnline ? 'online' : 'offline'">{{ user.name }}
+        <small>{{ user.isOnline ? 'Online' : 'Offline' }}</small>
+      </h3>
     </div>
   </app-header>
 </ion-header>
@@ -19,20 +21,59 @@
     <p>{{ user.description }}</p>
   </div>
 
-  <div class="message" *ngFor="let message of messages" [ngClass]="message.sender !== user.id ? 'outgoing' : 'incoming'">
-    <p dir="rtl">{{ message.message }}
-      <span *ngIf="message.sender !== user.id" [ngClass]="message.isSeen ? 'seen' : ''">
+  <div class="chat" *ngFor="let message of messages">
+    <div [ngClass]="'chat-message ' + (message.sender !== user.id ? 'right' : 'left')">
+      <div class="message-detail"><p [innerHTML]="message.message"></p>
+        <span *ngIf="message.sender !== user.id" [ngClass]="message.isSeen ? 'seen' : ''">
         <ion-icon name="ios-checkmark"></ion-icon>
       </span>
-    </p>
+      </div>
+
+      <div class="images" *ngIf="message.images.length" [style.columnCount]="message.images.length === 1 ? 1 : (message.images.length === 2 ? 2 : 3)">
+        <img [src]="image" alt="chat photo" *ngFor="let image of message.images">
+      </div>
+    </div>
   </div>
 </ion-content>
 
 <ion-footer>
   <form [formGroup]="chat" (ngSubmit)="send()">
     <ion-row>
-      <ion-col col-10>
-        <ion-input placeholder="Aa..." formControlName="message" type="text" autocomplete="off"></ion-input>
+      <ion-col col-12 *ngIf="chat.controls['img'].value.length">
+        <div class="img-preview" *ngFor="let photo of chat.controls['img'].value; let index = index">
+          <span (click)="chat.controls['img'].removeAt(index)">x</span>
+          <img [src]="photo" alt="chat photo" height="50px">
+        </div>
+      </ion-col>
+      <ion-col *ngIf="chat.controls['inputType'].value  === 'message'" col-10 formArrayName="message">
+        <button icon-only ion-button color="light" class="more" (click)="openPopOver($event)" type="button">
+          <ion-icon name="more"></ion-icon>
+        </button>
+        <div style="width: 100%;" formGroupName="0">
+          <ion-input placeholder="Aa..."
+            formControlName="message"
+            type="text"
+            autocomplete="off"
+          ></ion-input>
+        </div>
+      </ion-col>
+
+      <ion-col class="no-flex" *ngIf="chat.controls['inputType'].value === 'table'" col-10 formArrayName="message">
+        <div style="width: 100%; display: block;" *ngFor="let message of chat.get('message').controls; let i = index;">
+          <div style="width: 100%;" [formGroupName]="i">
+            <ion-input placeholder="Medicine..." formControlName="message1" type="text" autocomplete="off" style="width: 40%;display: inline-block;"></ion-input>
+            <ion-input placeholder="Dosing..." formControlName="message2" type="text" autocomplete="off" style="width: 40%;display: inline-block;"></ion-input>
+          </div>
+        </div>
+
+        <div style="position: absolute;right: -4px;bottom: 5px;width: 20%;padding-top: 6px;">
+          <button icon-only ion-button color="primary" type="button" (click)="addItem()">
+            <ion-icon name="plus"></ion-icon>
+          </button>
+          <button icon-only ion-button color="light" class="more" (click)="openPopOver($event)" type="button">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </div>
       </ion-col>
 
       <ion-col col-2>

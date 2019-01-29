@@ -5,6 +5,8 @@ import {AuthProvider} from "./helpers/auth";
 import {Functions} from "./helpers/functions";
 import {Values} from "./helpers/values";
 import {PusherProvider} from "./helpers/pusher";
+import {Events} from "ionic-angular";
+import {FCM} from "@ionic-native/fcm";
 
 @Injectable()
 export class VirtualClinicApp {
@@ -14,8 +16,13 @@ export class VirtualClinicApp {
     public values: Values,
     public functions: Functions,
     public storage: Storage,
-    public pusher: PusherProvider
+    public events: Events,
+    public pusher: PusherProvider,
+    private fcm: FCM
   ) {
+    this.events.subscribe('user:loggedOut', () => {
+      this.http.setTokenToHeaders();
+    });
   }
 
   initApp() {
@@ -27,6 +34,24 @@ export class VirtualClinicApp {
 
             this.auth.token.then((token) => {
               this.http.setTokenToHeaders(token);
+              // this.fcm.getToken().then(token =>
+              //   this.http.put('api/users/auth/update-token', {token})
+              // );
+              //
+              // this.fcm.onTokenRefresh().subscribe(token => {
+              //   this.http.put('api/users/auth/update-token', {token})
+              // });
+              //
+              // this.fcm.onNotification().subscribe(data => {
+              //   if (data.wasTapped) {
+              //     console.log("Received in background");
+              //     alert("Received in background");
+              //   } else {
+              //     alert("Received in foreground");
+              //     console.log("Received in foreground");
+              //   }
+              // });
+
               res(true);
             }, () => res(true));
           });
@@ -40,6 +65,10 @@ export class VirtualClinicApp {
 
   presentToast(message, options?) {
     return this.functions.presentToast(message, options);
+  }
+
+  presentActionSeet(options) {
+    return this.functions.presentActionSeet(options);
   }
 
   loading(name) {

@@ -34,8 +34,8 @@
               <ion-icon name="ios-person-outline"></ion-icon>
             </ion-label>
             <ion-select placeholder="Gender" id="gender" formControlName="gender">
-              <ion-option value="0">Male</ion-option>
-              <ion-option value="1">Female</ion-option>
+              <ion-option value="male">Male</ion-option>
+              <ion-option value="female">Female</ion-option>
             </ion-select>
           </ion-col>
           <ion-col col-12>
@@ -48,10 +48,8 @@
             <ion-label>
               <ion-icon name="ios-person-outline"></ion-icon>
             </ion-label>
-            <ionic-selectable item-content placeholder="Country" formControlName="country"
-                              [items]="app.values.countries | withKeys" [canSearch]="true"
-                              itemValueField="key" itemTextField="value">
-            </ionic-selectable>
+
+
           </ion-col>
         </ion-row>
       </ion-slide>

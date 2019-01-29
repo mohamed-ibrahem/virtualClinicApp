@@ -21,8 +21,11 @@ export class HttpProvider {
     this.events.subscribe('user:loggedIn', (token) => this.setTokenToHeaders(token));
   }
 
-  setTokenToHeaders(token) {
-    this.options.headers = this.options.headers.append('Authorization', `Bearer ${token}`);
+  setTokenToHeaders(token?) {
+    if (token)
+      this.options.headers = this.options.headers.append('Authorization', `Bearer ${token}`);
+    else
+      this.options.headers = this.options.headers.delete('Authorization');
   }
 
   setUrl() {
@@ -31,7 +34,8 @@ export class HttpProvider {
         inputs: [
           {
             name: 'url',
-            placeholder: 'Url'
+            placeholder: 'Url',
+            value: 'https://20557bcb.ngrok.io'
           },
         ],
         buttons: [

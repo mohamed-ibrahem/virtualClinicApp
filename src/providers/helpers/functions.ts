@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {AlertController, LoadingController, ToastController} from "ionic-angular";
+import {ActionSheetController, AlertController, LoadingController, ToastController} from "ionic-angular";
 
 @Injectable()
 export class Functions {
@@ -8,7 +8,8 @@ export class Functions {
   constructor(
     public alert: AlertController,
     public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public actionSheet: ActionSheetController
   ) {
   }
 
@@ -26,6 +27,10 @@ export class Functions {
       position: 'bottom',
       dismissOnPageChange: false
     }, options)).present();
+  }
+
+  presentActionSeet(options) {
+    this.actionSheet.create(options).present();
   }
 
   loading(name) {
