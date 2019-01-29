@@ -34,8 +34,7 @@ export class HttpProvider {
         inputs: [
           {
             name: 'url',
-            placeholder: 'Url',
-            value: 'https://20557bcb.ngrok.io'
+            placeholder: 'Url'
           },
         ],
         buttons: [

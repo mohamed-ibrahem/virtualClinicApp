@@ -34,23 +34,16 @@ export class VirtualClinicApp {
 
             this.auth.token.then((token) => {
               this.http.setTokenToHeaders(token);
-              // this.fcm.getToken().then(token =>
-              //   this.http.put('api/users/auth/update-token', {token})
-              // );
-              //
-              // this.fcm.onTokenRefresh().subscribe(token => {
-              //   this.http.put('api/users/auth/update-token', {token})
-              // });
-              //
-              // this.fcm.onNotification().subscribe(data => {
-              //   if (data.wasTapped) {
-              //     console.log("Received in background");
-              //     alert("Received in background");
-              //   } else {
-              //     alert("Received in foreground");
-              //     console.log("Received in foreground");
-              //   }
-              // });
+              this.fcm.getToken().then(token =>
+                this.http.put('api/users/auth/update-token', {token})
+              );
+
+              this.fcm.onTokenRefresh().subscribe(token => {
+                this.http.put('api/users/auth/update-token', {token})
+              });
+
+              this.fcm.onNotification().subscribe(data => {
+              });
 
               res(true);
             }, () => res(true));
