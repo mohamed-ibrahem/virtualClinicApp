@@ -47,6 +47,7 @@ page-chat {
           }
         }
       }
+
       .toolbar-ios {
         min-height: 60px;
       }
@@ -54,13 +55,8 @@ page-chat {
   }
 
   ion-content {
-    .scroll-content {
-      display: flex;
-      align-items: flex-end;
-      flex-wrap: wrap;
-    }
-
     &.no-messages .scroll-content {
+      display: flex;
       align-items: center;
       justify-content: center;
     }
@@ -104,37 +100,41 @@ page-chat {
         }
       }
     }
-    .message {
-      display: flex;
-      flex-direction: column;
-      flex-basis: 100%;
 
-      p {
-        color: #8a898b;
-        max-width: 95%;
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-        padding: 10px 15px 10px 7px;
-        margin: 5px 0;
-        background: #f0f0f0;
-        text-align: right;
+    .chat {
+      display: block;
+
+      &:after {
+        content: '';
+        display: table;
+        clear: both;
       }
-      &.incoming {
-        justify-content: flex-start;
-        align-items: flex-start;
 
-        p {
-          color: #fff;
-          border-radius: 0 11px 11px 11px;
-          background: color($colors, primary);
+      .chat-message {
+        border-radius: 5px;
+        display: block;
+        padding: 10px 18px;
+        position: relative;
+        margin: 10px;
+
+        &:before {
+          content: "\00a0";
+          display: block;
+          height: 16px;
+          width: 9px;
+          position: absolute;
+          bottom: -7.5px;
         }
-      }
-      &.outgoing {
-        justify-content: flex-end;
-        align-items: flex-end;
+        &.right {
+          background-color: #e6e5eb;
+          float: right;
 
-        p {
-          border-radius: 11px 11px 0 11px;
-          padding-right: 20px;
+          &:before {
+            background-color: #e6e5eb;
+            right: 10px;
+            -webkit-transform: rotate(118deg) skew(-5deg);
+            transform: rotate(118deg) skew(-5deg);
+          }
 
           span {
             float: right;
@@ -147,6 +147,27 @@ page-chat {
             }
           }
         }
+        &.left {
+          background-color: #488aff;
+          color: #fff;
+          float: left;
+
+          &:before {
+            background-color: #488aff;
+            left: 10px;
+            -webkit-transform: rotate(70deg) skew(5deg);
+            transform: rotate(70deg) skew(5deg);
+          }
+        }
+
+        p {
+          margin: 0;
+          display: inline-block;
+        }
+
+        .images {
+          margin-top: 15px;
+        }
       }
     }
   }
@@ -155,17 +176,44 @@ page-chat {
     background-color: darken(color($colors, light), 5%);
 
     ion-row {
-      ion-col {
+      ion-col:not(.no-flex) {
         display: flex;
         align-items: center;
+      }
 
+      ion-col {
         ion-input {
           background-color: color($colors, light);
           padding-left: 10px;
-          padding-right: 10px;
+          padding-right: 25px;
         }
+
+        .more {
+          position: absolute;
+          top: 10px;
+          right: 5px;
+          z-index: 9;
+          bottom: 0;
+          margin: 0;
+          height: 100%;
+          box-shadow: none;
+        }
+
         button {
           max-height: 38px;
+        }
+
+        .img-preview {
+          position: relative;
+
+          span {
+            color: color($colors, danger);
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            font-size: 18px;
+            font-weight: bolder;
+          }
         }
       }
     }

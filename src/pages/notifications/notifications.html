@@ -1,0 +1,15 @@
+<ion-header>
+  <app-header title="Notifications"></app-header>
+</ion-header>
+
+<ion-content padding>
+  <ion-list no-lines *ngIf="users.auth?.notification.length">
+    <ion-item *ngFor="let notification of users.auth?.notification"></ion-item>
+  </ion-list>
+
+  <div class="no-data" *ngIf="! users.auth?.notification.length">
+    <ion-icon name="sad" large></ion-icon>
+
+    <h1>No Notifications found!</h1>
+  </div>
+</ion-content>

@@ -10,7 +10,8 @@
     <ion-list no-lines>
       <ion-item *ngIf="!withoutCategories && (searchData.categories | withKeys).length">
         <ion-scroll [scrollY]="false" [scrollX]="true" no-padding>
-          <ion-badge *ngFor="let category of (searchData.categories | withKeys)" (click)="openWith(category.value.display_name)">
+          <ion-badge *ngFor="let category of (searchData.categories | withKeys)"
+                     (click)="openWith(category.value.display_name)">
             {{ category.value.display_name }}
           </ion-badge>
         </ion-scroll>
@@ -18,12 +19,16 @@
       <user-card *ngFor="let user of (searchData.users | withKeys)" [user]="user.value"></user-card>
     </ion-list>
   </div>
-  <div id="no-data" *ngIf="searchData && ((searchData.users && searchData.categories) && !searchData.users.length) && search.trim().length">
-    No Data!!
+  <div class="no-data"
+       *ngIf="searchData && ((searchData.users && searchData.categories) && !searchData.users.length) && search.trim().length">
+    <ion-icon name="sad" large></ion-icon>
+
+    <h1>No Results.</h1>
   </div>
 
   <div id="home" *ngIf="! search.trim().length">
-    <ion-list no-lines>
+    <ion-list no-lines
+              *ngIf="users.auth?.isMember && (users.auth?.messages?.unCompleted.length || oldData.users.length)">
       <ion-item *ngIf="users.auth?.messages?.unCompleted.length">
         <h2>Complete the conversations</h2>
       </ion-item>
@@ -40,11 +45,57 @@
         </ion-scroll>
       </ion-item>
 
-      <ion-item *ngIf="users.auth?.messages?.completed.length">
+      <ion-item *ngIf="(users.auth?.messages?.completed | canRateFilter)">
         <h2>Rate the doctors</h2>
       </ion-item>
 
-      <user-card *ngFor="let _user of users.auth?.messages?.completed" view="card" type="rate-now" [user]="_user.with"></user-card>
+      <user-card *ngFor="let _user of (users.auth?.messages?.completed | canRateFilter)" view="card" type="rate-now"
+                 [user]="_user.with"></user-card>
     </ion-list>
+
+    <ion-list no-lines *ngIf="users.auth?.isDoctor && users.auth?.messages?.completed.length">
+      <ion-item *ngIf="users.auth?.messages?.unCompleted.length">
+        <h2>You appeared in <u>{{ users.auth?.messages?.unCompleted.length }}</u> searches!</h2>
+      </ion-item>
+      <user-card *ngFor="let _user of users.auth?.messages?.unCompleted" [user]="_user.with"></user-card>
+
+      <ion-item *ngIf="users.auth?.messages?.completed.length">
+        <h2>Keep on helping</h2>
+      </ion-item>
+      <user-card *ngFor="let _user of users.auth?.messages?.completed" [user]="_user.with"></user-card>
+
+      <ion-item>
+        <ion-row>
+          <ion-col col-6>
+            <ion-card>
+              <ion-card-header>
+                <h3 text-center>Your Rate</h3>
+              </ion-card-header>
+              <ion-card-content text-center>
+                <rating [rate]="users.auth?.rate"></rating>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-6>
+            <ion-card>
+              <ion-card-header>
+                <h3 text-center>Profile Completion</h3>
+              </ion-card-header>
+              <ion-card-content text-center>
+                <rating [rate]="users.auth?.profileCompletion"></rating>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+    <div class="welcome" text-center>
+      <img src="../../assets/imgs/logo.png" height="64px" alt="Virtual Clinic"/>
+      <h1>Welcome To Virtual Clinic App</h1>
+      <p *ngIf="users.auth?.isMember">Search About Doctors, Specialties Or Articles to Start using our App!</p>
+      <p *ngIf="users.auth?.isDoctor"><b>Just wait!</b> You are now appearing in search results, And will be notified
+        when you receive any messages</p>
+    </div>
   </div>
 </ion-content>

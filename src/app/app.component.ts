@@ -22,11 +22,11 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      events.subscribe('user:loggedIn', () =>
+      events.subscribe('user:loggedIn', () => {
         this.nav.setRoot(TabsPage, {}, {
           animate: true
-        })
-      );
+        });
+      });
 
       events.subscribe('user:loggedOut', () =>
         this.nav.setRoot(LoginPage, {}, {

@@ -10,7 +10,9 @@ export class PusherProvider {
     Pusher.logToConsole = true;
   }
 
-  public init() {
+  public init(options) {
+    this.options = options;
+
     return new Pusher(this.options.app, {
       cluster: this.options.cluster,
       encrypted: this.options.encrypted,

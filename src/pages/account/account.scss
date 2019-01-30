@@ -1,3 +1,44 @@
 page-account {
+  ion-content {
+    form {
+      img {
+        display: block;
+        width: 100px;
+        max-height: 100px;
+        margin: 0 auto 50px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
 
+      ion-list {
+        ion-item {
+          padding-left: 15px !important;
+          padding-right: 15px !important;
+          background-color: color($colors, light) !important;
+          margin-bottom: 3px !important;
+
+          &, & .item-inner {
+            border: none !important;
+            box-shadow: none !important;
+          }
+          &.has-input-focus {
+            ion-label {
+              color: color($colors, primary);
+            }
+          }
+          ion-label {
+            color: darken(color($colors, light), 35%);
+          }
+
+          &.ng-invalid {
+            border-bottom: 1px solid color($colors, danger) !important;
+          }
+        }
+      }
+    }
+  }
+
+  ion-footer {
+    background-color: #fff;
+  }
 }

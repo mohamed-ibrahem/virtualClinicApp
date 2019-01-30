@@ -20,6 +20,12 @@ page-login {
 
       ion-row {
         min-height: 310px;
+		
+		@media(max-height: 488px) {
+			ion-col:first-of-type {
+				display: none;
+			}
+		}
 
         ion-label {
           position: absolute;

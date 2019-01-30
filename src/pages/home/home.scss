@@ -18,6 +18,7 @@ page-home {
             height: 55px;
           }
         }
+
         &.without-input {
           .searchbar-input-container {
             visibility: hidden;
@@ -26,6 +27,7 @@ page-home {
       }
     }
   }
+
   ion-content {
     > .scroll-content, > .fixed-content {
       transition: margin-top .4s ease-in-out;
@@ -41,6 +43,7 @@ page-home {
     &.has-search-data > .scroll-content, &.has-search-data > .fixed-content {
       margin-top: 85px !important;
     }
+
     &.has-search-data.content-md > .scroll-content, &.content-md.has-search-data > .fixed-content {
       margin-top: 112px !important;
     }
@@ -80,11 +83,16 @@ page-home {
       ion-list {
         user-card {
           ion-card {
-            img {
+            img.profile_pic {
               width: 120px;
               margin: 15px auto;
               border-radius: 50%;
               overflow: hidden;
+            }
+
+            img.flag {
+              width: 14px;
+              display: inline;
             }
 
             ion-card-content {
@@ -115,7 +123,7 @@ page-home {
                 width: 150px;
                 display: inline-block;
 
-                img {
+                img.profile_pic {
                   width: 60px;
                 }
 
@@ -130,18 +138,37 @@ page-home {
               }
             }
           }
+
+          ion-row {
+            ion-col {
+              padding: 0 !important;
+              padding-right: 5px !important;
+
+              &:not(:first-of-type) {
+                padding-right: 0 !important;
+                padding-left: 5px !important;
+              }
+
+              ion-card {
+                margin: 12px 1px !important;
+                width: calc(100% - 2px);
+              }
+            }
+          }
         }
+      }
+
+      .welcome {
+        display: none;
+      }
+      .welcome:first-child {
+        display: block;
+        justify-content: center;
       }
     }
 
-    #no-data {
-      display: flex;
-      width: 100%;
+    .no-data {
       height: calc(100% - 60px);
-      align-items: center;
-      justify-content: center;
-      color: color($colors, danger);
-      font-size: 18px;
     }
   }
 }

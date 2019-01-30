@@ -2,27 +2,92 @@
   <app-header title="Account Settings"></app-header>
 </ion-header>
 
+<ion-content padding-vertical>
+  <form [formGroup]="account" (submit)="update()" enctype="multipart/form-data">
+    <img [src]="imageData ? imageData : user.profile_pic" [alt]="user.name" (click)="getPhoto()">
 
-<ion-content padding>
-  <form [formGroup]="account">
-    <ion-list>
+    <ion-list no-lines>
+      <h4 padding-horizontal>Account</h4>
+
       <ion-item>
         <ion-label floating>Name</ion-label>
         <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
+
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" readonly formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Phone</ion-label>
+        <ion-input type="tel" formControlName="phone"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list no-lines>
+      <h4 padding-horizontal>General information</h4>
+
+      <ion-item>
+        <ion-label floating>Age</ion-label>
+        <ion-input type="number" formControlName="age"></ion-input>
+      </ion-item>
+
       <ion-item>
         <ion-label floating>Gender</ion-label>
         <ion-select placeholder="Gender" formControlName="gender">
-          <ion-option value="0">Male</ion-option>
-          <ion-option value="1">Female</ion-option>
+          <ion-option value="male">Male</ion-option>
+          <ion-option value="female">Female</ion-option>
         </ion-select>
       </ion-item>
 
-      <button ion-item color="primary">
-        Save
-      </button>
+      <ion-item>
+        <ion-label floating>Country</ion-label>
+        <ionic-selectable item-content placeholder="Country" formControlName="country"
+                          [items]="app.values.countries | withKeys" [canSearch]="true"
+                          itemValueField="key" itemTextField="value">
+        </ionic-selectable>
+      </ion-item>
     </ion-list>
 
-    <button ion-button color="danger" block (click)="logout()">LogOut</button>
+    <ion-list no-lines>
+      <h4 padding-horizontal>Change Password</h4>
+
+      <ion-item>
+        <ion-label floating>Old Password</ion-label>
+        <ion-input type="password" formControlName="old_password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>New Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password Confirmation</ion-label>
+        <ion-input type="password" formControlName="password_confirmation"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list no-lines>
+      <h4 padding-horizontal>More Information</h4>
+
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+    </ion-list>
   </form>
+
+  <ion-list no-lines>
+    <button ion-item type="button" (click)="logout()">
+      Logout {{ users.auth.name }}
+    </button>
+  </ion-list>
 </ion-content>
+
+<ion-footer padding-horizontal>
+  <button *ngIf="account.dirty" [disabled]="account.invalid" (click)="update()" type="submit" block ion-button color="primary">
+    Save
+  </button>
+</ion-footer>

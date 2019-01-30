@@ -1,17 +1,17 @@
 <ion-item-sliding *ngIf="view === 'item' && type === 'show'">
   <ion-item (click)="goToChat()">
     <ion-avatar item-start>
-      <img [src]="user.profile_pic">
+      <img [src]="user.profile_pic" class="profile_pic">
     </ion-avatar>
     <h2>{{ user.name }}</h2>
     <p>
       {{ description ? description : '' }}
       <span *ngIf="!description">
         <span *ngIf="user.country">
-          <img [src]="user.country" alt="COUNTRY FLAG"> |
+          <img [src]="user.country" alt="COUNTRY FLAG" class="flag" width="16"> |
         </span>
-        {{ user.gender }} |
-        <rating [rate]="user.rating"></rating>
+        {{ user.gender }}
+        <rating *ngIf="user.isDoctor" [rate]="user.rating" [user_id]="user.id"></rating>
       </span>
     </p>
   </ion-item>
@@ -29,7 +29,7 @@
   </ion-item-options>
 </ion-item-sliding>
 <ion-card *ngIf="view === 'card'">
-  <img [src]="user.profile_pic" />
+  <img [src]="user.profile_pic" class="profile_pic">
 
   <ion-card-content>
     <ion-card-title>{{ user.name }}</ion-card-title>
@@ -37,14 +37,14 @@
       {{ description ? description : '' }}
       <span *ngIf="!description">
         <span *ngIf="user.country">
-          <img [src]="user.country" alt="COUNTRY FLAG"> |
+          <img [src]="user.country" alt="COUNTRY FLAG" class="flag" width="32"> |
         </span>
         {{ user.gender }}
       </span>
     </p>
   </ion-card-content>
   <ion-item>
-    <rating [rate]="user.rating" [type]="type"></rating>
+    <rating *ngIf="user.isDoctor" [rate]="user.rating" [type]="type" [user_id]="user.id"></rating>
   </ion-item>
   <button *ngIf="type !== 'rate-now'" ion-item (click)="goToChat()">
     Chat

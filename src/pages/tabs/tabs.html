@@ -4,7 +4,7 @@
   <ion-tab [tabsHideOnSubPages]="true" [root]="Message" tabTitle="Messages" [tabBadge]="users.auth?.messages?.completed.length"
            tabBadgeStyle="danger" tabIcon="chatbubbles"></ion-tab>
 
-  <ion-tab [tabsHideOnSubPages]="true" [root]="Message" tabTitle="Notifications" [tabBadge]="users.auth?.notification?.length"
+  <ion-tab [tabsHideOnSubPages]="true" [root]="Notifications" tabTitle="Notifications" [tabBadge]="users.auth?.notification?.length"
            [show]="users.auth?.isDoctor" tabBadgeStyle="danger" tabIcon="notifications"></ion-tab>
 
   <ion-tab [root]="Account" tabTitle="Account" tabIcon="contact"></ion-tab>

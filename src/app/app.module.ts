@@ -9,6 +9,7 @@ import {LoginPage} from "../pages/login/login";
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import { FCM } from '@ionic-native/fcm';
 import {AuthProvider} from '../providers/helpers/auth';
 import {HttpProvider} from '../providers/helpers/http';
 import {HttpClientModule} from "@angular/common/http";
@@ -27,6 +28,9 @@ import {PusherProvider} from "../providers/helpers/pusher";
 import {ComponentsModule} from "../components/components.module";
 import {AccountPage} from "../pages/account/account";
 import {MessagesPage} from "../pages/messages/messages";
+import {CanRateFilterPipe} from "../pipes/can-rate-filter/can-rate-filter";
+import {NotificationsPage} from "../pages/notifications/notifications";
+import {Camera} from "@ionic-native/camera";
 
 @NgModule({
   declarations: [
@@ -39,8 +43,10 @@ import {MessagesPage} from "../pages/messages/messages";
     ChatPage,
     AccountPage,
     MessagesPage,
+    NotificationsPage,
 
-    WithKeysPipe
+    WithKeysPipe,
+    CanRateFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -68,11 +74,14 @@ import {MessagesPage} from "../pages/messages/messages";
     ChatPage,
     AccountPage,
     MessagesPage,
+    NotificationsPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     StatusBar,
     SplashScreen,
+    FCM,
+    Camera,
     AuthProvider,
     HttpProvider,
     Functions,
