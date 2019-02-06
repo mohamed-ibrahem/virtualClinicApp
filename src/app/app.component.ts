@@ -21,6 +21,7 @@ export class MyApp {
               splashScreen: SplashScreen,
               events: Events) {
     platform.ready().then(() => {
+      statusBar.styleLightContent();
       statusBar.styleDefault();
       splashScreen.hide();
 
