@@ -29,7 +29,7 @@ export class MyApp {
       });
 
       app.fcm.onNotification().subscribe((data) => {
-        app.presentAlert('Notification', 'test');
+        app.presentAlert('Notification', data.body);
       });
 
       events.subscribe('user:loggedIn', () => {
