@@ -6,6 +6,7 @@ import {Functions} from "./helpers/functions";
 import {Values} from "./helpers/values";
 import {PusherProvider} from "./helpers/pusher";
 import {Events} from "ionic-angular";
+import {FCM} from "@ionic-native/fcm";
 
 @Injectable()
 export class VirtualClinicApp {
@@ -16,6 +17,7 @@ export class VirtualClinicApp {
     public functions: Functions,
     public storage: Storage,
     public events: Events,
+    public fcm: FCM,
     public pusher: PusherProvider
   ) {
     this.events.subscribe('user:loggedOut', () => {
@@ -40,7 +42,7 @@ export class VirtualClinicApp {
     })
   }
 
-  presentAlert(title, text, options) {
+  presentAlert(title, text, options?) {
     return this.functions.presentAlert(title, text, options);
   }
 

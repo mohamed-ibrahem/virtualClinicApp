@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {VirtualClinicApp} from "../VirtualClinicApp";
 import {MessageProvider} from "./message";
-import {FCM} from "@ionic-native/fcm";
 
 @Injectable()
 export class UserProvider {
   public auth: any;
 
-  constructor(public app: VirtualClinicApp, public message: MessageProvider, private fcm: FCM) {
+  constructor(public app: VirtualClinicApp, public message: MessageProvider) {
   }
 
   search(input) {
@@ -18,21 +17,12 @@ export class UserProvider {
 
   getAuth() {
     this.app.http.get('api/users/auth')
-      .subscribe((response) => {
-		this.fcm.getToken().then(token =>
-			this.app.http.put('api/users/auth/update-token', {token})
-		);
-
-		this.fcm.onTokenRefresh().subscribe(token => {
-			this.app.http.put('api/users/auth/update-token', {token})
-		});
-
-		this.fcm.onNotification().subscribe();
-		this.updateAuth(response.data);
-	  }, (error) => {
-        if (error.status === 401)
-          this.app.auth.logout();
-      })
+      .subscribe((response) =>
+          this.updateAuth(response.data),
+        (error) => {
+          if (error.status === 401)
+            this.app.auth.logout();
+        })
   }
 
   update(data) {

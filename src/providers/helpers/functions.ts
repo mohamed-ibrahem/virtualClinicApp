@@ -13,7 +13,7 @@ export class Functions {
   ) {
   }
 
-  presentAlert(title, text, options) {
+  presentAlert(title, text, options?) {
     return this.alert.create(Object.assign({
       title: title,
       subTitle: text
