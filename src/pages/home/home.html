@@ -28,7 +28,7 @@
 
   <div id="home" *ngIf="! search.trim().length">
     <ion-list no-lines
-              *ngIf="users.auth?.isMember && (users.auth?.messages?.unCompleted.length || oldData.users.length)">
+              *ngIf="users.auth?.isMember && (users.auth?.messages?.unCompleted.length || oldData.users.length || (users.auth?.messages?.completed | canRateFilter))">
       <ion-item *ngIf="users.auth?.messages?.unCompleted.length">
         <h2>Complete the conversations</h2>
       </ion-item>
@@ -45,12 +45,12 @@
         </ion-scroll>
       </ion-item>
 
-      <ion-item *ngIf="(users.auth?.messages?.completed | canRateFilter)">
+      <ion-item *ngIf="(users.auth?.messages?.completed | canRateFilter).length">
         <h2>Rate the doctors</h2>
       </ion-item>
 
-      <user-card *ngFor="let _user of (users.auth?.messages?.completed | canRateFilter)" view="card" type="rate-now"
-                 [user]="_user.with"></user-card>
+      <user-card view="card" type="rate-now" *ngIf="(users.auth?.messages?.completed | canRateFilter).length"
+                 [user]="(users.auth?.messages?.completed | canRateFilter)[(users.auth?.messages?.completed | canRateFilter).length - 1].with"></user-card>
     </ion-list>
 
     <ion-list no-lines *ngIf="users.auth?.isDoctor && users.auth?.messages?.completed.length">

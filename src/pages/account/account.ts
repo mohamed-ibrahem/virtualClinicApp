@@ -15,13 +15,13 @@ export class AccountPage {
   account;
   user;
 
-  constructor(formBuilder: FormBuilder,
+  constructor(protected formBuilder: FormBuilder,
               protected camera: Camera,
               public app: VirtualClinicApp,
               public users: UserProvider) {
     this.user = this.users.auth;
 
-    this.account = formBuilder.group({
+    this.account = this.formBuilder.group({
       name: [this.user.name, [Validators.required]],
       email: [this.user.email, [Validators.required]],
       phone: [(this.user.phone ? this.user.phone : ''), [Validators.required]],
@@ -85,6 +85,20 @@ export class AccountPage {
   update() {
     return this.users.update(this.account.value).then(
       () => {
+        this.app.presentToast('Your data updated successfully!');
+        this.account = this.formBuilder.group({
+          name: [this.user.name, [Validators.required]],
+          email: [this.user.email, [Validators.required]],
+          phone: [(this.user.phone ? this.user.phone : ''), [Validators.required]],
+          old_password: [''],
+          password: [''],
+          password_confirmation: [''],
+          age: [this.user.age, [Validators.required]],
+          country: [this.user.country_code, [Validators.required]],
+          gender: [this.user.gender.toLowerCase(), [Validators.required]],
+          description: [this.user.description, [Validators.required]],
+          img: ['']
+        }, {updateOn: 'blur'});
       },
       (response) => {
         this.app.presentToast(response.message);

@@ -15,6 +15,6 @@ export class CanRateFilterPipe implements PipeTransform {
   transform(conversations: Array<any>) {
     return conversations.filter((conversation) => {
       return conversation.with.canRate;
-    }).pop();
+    });
   }
 }

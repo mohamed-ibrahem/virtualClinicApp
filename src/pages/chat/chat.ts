@@ -52,7 +52,7 @@ export class ChatPage {
             this.ionViewDidEnter();
 
             if (response.message.sender == this.user.id)
-              this.app.http.post(`api/users/message/${response.message.id}/seen`, {}).subscribe();
+              this.app.http.post(`api/users/message/${data.messages.id}/seen`, {}).subscribe(() => this.users.getAuth());
           });
 
         let seenMessages = this.messages.filter((message) => {
@@ -60,19 +60,7 @@ export class ChatPage {
         });
 
         if (seenMessages.length) {
-          this.app.http.post(`api/users/message/${seenMessages.pop().id}/seen`, {}).subscribe();
-        }
-
-        let messages = this.messages.filter((message) => {
-          return message.sender != this.user.id && !message.isSeen;
-        });
-
-        if (messages.length) {
-          this.channels.push(`private-message-${messages.pop().id}-seen`);
-          this._pusher.subscribe(`private-message-${messages.pop().id}-seen`)
-            .bind('App\\Events\\MessageSeen', () => {
-              messages.forEach((message) => message.isSeen = true);
-            });
+          this.app.http.post(`api/users/message/${data.messages.id}/seen`, {}).subscribe(() => this.users.getAuth());
         }
       });
 
@@ -127,8 +115,16 @@ export class ChatPage {
 
   send() {
     this.users.message.send(this.chat.value).subscribe((response) => {
-      this.chat.get('inputType').setValue('message');
-      this.chat.get('img').reset();
+      this.chat = this.fb.group({
+        inputType: ['message'],
+        message: new FormArray([
+          this.fb.group({
+            message: ''
+          })
+        ]),
+        img: new FormArray([]),
+        user: [this.user.id]
+      });
     });
   }
 

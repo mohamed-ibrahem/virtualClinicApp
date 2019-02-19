@@ -5,7 +5,7 @@
     </ion-avatar>
     <h2>{{ user.name }}</h2>
     <p>
-      {{ description ? description : '' }}
+      <span [innerHTML]="description ? description : ''"></span>
       <span *ngIf="!description">
         <span *ngIf="user.country">
           <img [src]="user.country" alt="COUNTRY FLAG" class="flag" width="16"> |

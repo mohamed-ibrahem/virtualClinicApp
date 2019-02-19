@@ -186,6 +186,10 @@ page-chat {
           background-color: color($colors, light);
           padding-left: 10px;
           padding-right: 25px;
+
+          &.input-ios {
+            padding-right: 38px;
+          }
         }
 
         .more {

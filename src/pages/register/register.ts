@@ -65,7 +65,10 @@ export class RegisterPage {
       password_confirmation: this.form.value.register[1].password_confirmation,
       description: this.form.value.register[2].description
     }).then(
-      () => this.app.presentToast(this.app.values.get('auth.success')),
+      () => {
+        this.app.storage.clear();
+        this.app.presentToast(this.app.values.get('auth.success'));
+      },
       (error) => this.app.presentToast(error.message));
   }
 

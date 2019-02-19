@@ -41,8 +41,8 @@ export class HttpProvider {
           {
             text: 'Save',
             handler: data => {
-              this.url = 'https://' + data.url + '.ngrok.io';
-              // this.url = data.url;
+              // this.url = 'https://' + data.url + '.ngrok.io';
+              this.url = data.url;
 
               res();
             }

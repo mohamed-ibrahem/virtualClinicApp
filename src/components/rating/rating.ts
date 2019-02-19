@@ -37,7 +37,7 @@ export class RatingComponent {
 
       this.users.rate(this.user_id, amount).subscribe((response) => {
         this.app.presentToast('Thank you for your rating');
-        this.events.publish(`user_${this.user_id}_rating`);
+        this.users.getAuth();
         this.rate = response.rate;
       });
     }
